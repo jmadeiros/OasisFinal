@@ -222,8 +222,18 @@ export default function IntroSection({ onScrollToFrames }: IntroSectionProps) {
     <section ref={sectionRef} className="w-full h-screen relative overflow-hidden" id="intro-section">
       {/* Header */}
       <header className="absolute top-0 left-0 right-0 z-50 py-6 px-6 md:px-12">
-        <div className="w-full flex justify-between items-center">
-          <div className="w-auto"></div>
+        <div className="w-full flex justify-end items-center">
+          <div className="w-auto absolute left-[-15px] md:left-[-10px] top-2 z-50">
+            <Link href="/">
+              <div className="relative">
+                <img 
+                  src="/images/oasis-st-martins-village-logo.png" 
+                  alt="Oasis St Martins Village Logo" 
+                  className="h-52 w-auto brightness-125"
+                />
+              </div>
+            </Link>
+          </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center justify-end space-x-6 pr-0">
@@ -327,111 +337,6 @@ export default function IntroSection({ onScrollToFrames }: IntroSectionProps) {
             <Menu size={24} />
           </button>
         </div>
-
-        {/* Mobile Menu */}
-        {mobileMenuOpen && (
-          <div className="md:hidden fixed top-20 left-0 right-0 bottom-0 bg-black/95 p-6 z-50 h-[calc(100vh-5rem)] overflow-y-auto">
-            <nav className="flex flex-col space-y-6">
-              <a
-                href="#frames-section"
-                className="text-white text-sm font-medium hover:text-[var(--village-green)] hover:font-bold transition-all"
-                onClick={(e) => {
-                  e.preventDefault()
-                  setMobileMenuOpen(false)
-                  scrollWithSmoothPace("frames-section")
-                }}
-              >
-                Spaces
-              </a>
-              <Link
-                href="/community"
-                className="text-white text-sm font-medium hover:text-[var(--village-green)] hover:font-bold transition-all"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Community
-              </Link>
-              <Link
-                href="/about-us"
-                className="text-white text-sm font-medium hover:text-[var(--village-green)] hover:font-bold transition-all"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                About
-              </Link>
-              <DropdownMenu>
-                <DropdownMenuTrigger className="text-white text-sm font-medium hover:text-[var(--village-green)] hover:font-bold transition-all focus:outline-none text-left w-full">
-                  Contact
-                </DropdownMenuTrigger>
-                <DropdownMenuContent
-                  align="start"
-                  className="w-72 p-0 overflow-hidden border-0 shadow-lg bg-transparent"
-                >
-                  <div className="relative overflow-hidden rounded-xl">
-                    {/* Background gradient for mobile */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-gray-900 to-black -z-10"></div>
-
-                    {/* Subtle background pattern */}
-                    <div className="absolute inset-0 z-0 opacity-5">
-                      <div
-                        className="absolute inset-0"
-                        style={{
-                          backgroundImage:
-                            "radial-gradient(circle at 25px 25px, rgba(255, 255, 255, 0.3) 2px, transparent 0)",
-                          backgroundSize: "50px 50px",
-                        }}
-                      ></div>
-                    </div>
-
-                    {/* Floating circle decoration */}
-                    <div className="absolute -top-10 -right-10 w-20 h-20 rounded-full bg-[var(--village-teal)]/10 z-0"></div>
-                    <div className="absolute -bottom-8 -left-8 w-16 h-16 rounded-full bg-[var(--village-orange)]/10 z-0"></div>
-
-                    <div className="p-5 relative z-10">
-                      <h3 className="text-xl font-medium text-[var(--village-orange)] mb-4">Get in Touch</h3>
-
-                      <div className="space-y-3">
-                        <a href="mailto:all@scailer.io" className="flex items-center group">
-                          <div className="bg-[var(--village-teal)]/20 p-2 rounded-full mr-3 group-hover:bg-[var(--village-teal)]/30 transition-colors">
-                            <Mail className="h-4 w-4 text-[var(--village-teal)]" />
-                          </div>
-                          <span className="text-white group-hover:text-[var(--village-teal)] transition-colors">
-                            all@scailer.io
-                          </span>
-                        </a>
-
-                        <a href="tel:07975708289" className="flex items-center group">
-                          <div className="bg-[var(--village-orange)]/20 p-2 rounded-full mr-3 group-hover:bg-[var(--village-orange)]/30 transition-colors">
-                            <Phone className="h-4 w-4 text-[var(--village-orange)]" />
-                          </div>
-                          <span className="text-white group-hover:text-[var(--village-orange)] transition-colors">
-                            07975 708289
-                          </span>
-                        </a>
-
-                        <div className="flex items-start group">
-                          <div className="bg-[var(--village-green)]/20 p-2 rounded-full mr-3 mt-0.5 flex-shrink-0">
-                            <MapPin className="h-4 w-4 text-[var(--village-green)]" />
-                          </div>
-                          <span className="text-white">
-                            155 Tulse Hill
-                            <br />
-                            London, SW2 3UP
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </DropdownMenuContent>
-              </DropdownMenu>
-              <Link
-                href="/book-tour"
-                className="bg-white text-black px-4 py-2 text-sm font-medium rounded-md hover:bg-[var(--village-green)] hover:text-white transition-all shadow-md hover:shadow-lg transform hover:-translate-y-1 w-full"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Book a Tour
-              </Link>
-            </nav>
-          </div>
-        )}
       </header>
 
       {/* Background Video */}
@@ -446,35 +351,6 @@ export default function IntroSection({ onScrollToFrames }: IntroSectionProps) {
       {/* Content */}
       <div className="relative z-20 h-full flex flex-col items-center justify-center px-6 md:px-12 py-20">
         <div className="text-center max-w-4xl mx-auto relative">
-          {/* Village Logo positioned more to the left and higher */}
-          <motion.div
-            custom={0}
-            initial="hidden"
-            animate={isVisible ? "visible" : "hidden"}
-            variants={textVariants}
-            className="absolute transform"
-            style={{
-              position: "absolute",
-              top: "-350px",
-              left: "-750px",
-              zIndex: 60,
-            }}
-          >
-            <img
-              src="/images/oasis-st-martins-village-logo.png"
-              alt="Oasis St Martin's Village"
-              className="w-auto max-h-48 md:max-h-72 lg:max-h-[22rem]"
-              style={{
-                filter: "brightness(1.2) contrast(0.95)",
-                transform: "scale(0.55)",
-                objectFit: "contain",
-                objectPosition: "left top",
-                maxWidth: "100%",
-                height: "auto",
-              }}
-            />
-          </motion.div>
-
           <motion.div
             custom={0}
             initial="hidden"
