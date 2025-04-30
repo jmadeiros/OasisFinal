@@ -199,8 +199,8 @@ export default function BookTourForm() {
             </Link>
           </div>
 
-          {/* Enhanced Header with Decorative Elements */}
-          <div className="text-center mb-12 max-w-3xl mx-auto">
+          {/* Enhanced Header with Decorative Elements & Background */}
+          <div className="text-center mb-12 max-w-3xl mx-auto bg-black/20 px-6 py-4 rounded-2xl">
             <div className="mb-2 text-[#4a7c59] font-medium">THE VILLAGE</div>
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 relative text-shadow">
               <span className="relative inline-block">
@@ -425,7 +425,12 @@ export default function BookTourForm() {
               <div className="bg-white p-5 md:p-8 rounded-xl shadow-sm">
                 <div className="rounded-lg overflow-hidden mb-6 h-[250px] bg-[#e0d5c8]">
                   <div className="relative w-full h-full">
-                    <Image src="/images/wooden-hall-long.jpeg" alt="The Village Tour" fill className="object-cover" />
+                    <Image 
+                      src="/images/wooden-hall.png"
+                      alt="The Village Tour" 
+                      fill 
+                      className="object-cover" 
+                    />
                   </div>
                 </div>
 

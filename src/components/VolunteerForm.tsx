@@ -320,46 +320,22 @@ export default function VolunteerForm() {
         </form>
       </div>
 
-      {/* Image and Info Column - Right Side */}
-      <div className="lg:w-[40%] mt-12 lg:mt-0">
-        <div className="rounded-lg overflow-hidden mb-6 h-[300px] bg-[#e0d5c8]">
-          <div className="relative w-full h-full">
-            <Image
-              src="/images/community-connection.jpeg"
-              alt="Volunteer at The Village"
-              fill
-              className="object-cover"
-            />
-          </div>
+      {/* Image and Text Column - Right Side */}
+      <div className="lg:w-[40%] mt-16 lg:mt-0 max-w-md mx-auto lg:mx-0">
+        <div className="relative w-full aspect-[4/3] rounded-lg overflow-hidden mb-6 shadow-md">
+          <Image
+            src="/images/community-conversation.jpeg"
+            alt="People talking together at The Village"
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 40vw"
+          />
         </div>
-
-        <div className="space-y-4">
-          <h3 className="text-2xl font-bold text-[#1e293b]">Join Our Volunteer Team</h3>
-
-          <p className="text-[#475569]">
-            Volunteering at The Village is a rewarding way to contribute to our community while developing new skills
-            and connections.
-          </p>
-
-          <div className="space-y-2">
-            <div className="flex items-start">
-              <CheckIcon className="h-5 w-5 text-[#4a7c59] mr-2 mt-0.5" />
-              <span className="text-[#475569]">Flexible time commitments</span>
-            </div>
-            <div className="flex items-start">
-              <CheckIcon className="h-5 w-5 text-[#4a7c59] mr-2 mt-0.5" />
-              <span className="text-[#475569]">Develop new skills and experience</span>
-            </div>
-            <div className="flex items-start">
-              <CheckIcon className="h-5 w-5 text-[#4a7c59] mr-2 mt-0.5" />
-              <span className="text-[#475569]">Connect with our diverse community</span>
-            </div>
-            <div className="flex items-start">
-              <CheckIcon className="h-5 w-5 text-[#4a7c59] mr-2 mt-0.5" />
-              <span className="text-[#475569]">Make a meaningful impact</span>
-            </div>
-          </div>
-        </div>
+        <h3 className="text-xl font-bold text-[#1e293b] mb-3">Join Our Volunteer Team</h3>
+        <p className="text-[#475569]">
+          Volunteering at The Village is a rewarding way to contribute to our community while developing new skills and
+          connections.
+        </p>
       </div>
     </div>
   )

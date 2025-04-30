@@ -144,7 +144,7 @@ export default function ContactSection() {
 
             <div className="aspect-video w-full mt-6 rounded-lg overflow-hidden shadow-md">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2482.7307481494783!2d-0.12809548422864174!3d51.51481667963643!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487604ccab37652b%3A0x9e7cf2cd58de10a3!2sCovent%20Garden%2C%20London!5e0!3m2!1sen!2suk!4v1648138776461!5m2!1sen!2suk"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2486.459134662097!2d-0.1142016245070226!3d51.44915137179676!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4876046f907b00c9%3A0x4a339711975471a5!2s155%20Tulse%20Hill%2C%20London%20SW2%203UP!5e0!3m2!1sen!2suk!4v1718119737255!5m2!1sen!2suk"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}

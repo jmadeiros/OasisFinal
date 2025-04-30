@@ -20,16 +20,18 @@ export default function IntroSection({ onScrollToFrames }: IntroSectionProps) {
   const isMac = useMacOS()
 
   const placeUses = [
+    "Community",
+    "Learning",
+    "Gathering",
+    "Belonging",
+    "Volunteering",
     "Your Team",
     "Your Office",
-    "Meetings",
-    "Corporate Events",
-    "Coworking",
-    "Wedding Receptions",
-    "Sport",
-    "Community",
-    "Growth",
-    "Catering",
+    "Co-working",
+    "Your Meetings",
+    "Your Events",
+    "Sports",
+    "Hosting with Food",
   ]
 
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -266,59 +268,41 @@ export default function IntroSection({ onScrollToFrames }: IntroSectionProps) {
               <DropdownMenuTrigger className="text-white text-sm font-medium hover:text-[var(--village-green)] hover:font-bold transition-all focus:outline-none">
                 Contact
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-72 p-0 overflow-hidden border-0 shadow-lg">
-                <div className="relative overflow-hidden rounded-xl">
-                  {/* Background gradient similar to Built for Community cards */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-[var(--village-cream)] via-white to-white/90 -z-10"></div>
+              <DropdownMenuContent 
+                align="end" 
+                className="w-72 p-4 bg-[#f8f5f0] border border-gray-200 rounded-xl shadow-lg"
+              >
+                <div className="relative z-10">
+                  <h3 className="text-lg font-semibold text-[var(--village-green)] mb-4">Get in Touch</h3>
 
-                  {/* Subtle background pattern */}
-                  <div className="absolute inset-0 z-0 opacity-5">
-                    <div
-                      className="absolute inset-0"
-                      style={{
-                        backgroundImage:
-                          "radial-gradient(circle at 25px 25px, rgba(74, 124, 89, 0.3) 2px, transparent 0)",
-                        backgroundSize: "50px 50px",
-                      }}
-                    ></div>
-                  </div>
-
-                  {/* Floating circle decoration */}
-                  <div className="absolute -top-10 -right-10 w-20 h-20 rounded-full bg-[var(--village-teal)]/10 z-0"></div>
-                  <div className="absolute -bottom-8 -left-8 w-16 h-16 rounded-full bg-[var(--village-orange)]/10 z-0"></div>
-
-                  <div className="p-5 relative z-10">
-                    <h3 className="text-xl font-medium text-[var(--village-orange)] mb-4">Get in Touch</h3>
-
-                    <div className="space-y-3">
-                      <a href="mailto:all@scailer.io" className="flex items-center group">
-                        <div className="bg-[var(--village-teal)]/10 p-2 rounded-full mr-3 group-hover:bg-[var(--village-teal)]/20 transition-colors">
-                          <Mail className="h-4 w-4 text-[var(--village-teal)]" />
-                        </div>
-                        <span className="text-gray-700 group-hover:text-[var(--village-teal)] transition-colors">
-                          all@scailer.io
-                        </span>
-                      </a>
-
-                      <a href="tel:07975708289" className="flex items-center group">
-                        <div className="bg-[var(--village-orange)]/10 p-2 rounded-full mr-3 group-hover:bg-[var(--village-orange)]/20 transition-colors">
-                          <Phone className="h-4 w-4 text-[var(--village-orange)]" />
-                        </div>
-                        <span className="text-gray-700 group-hover:text-[var(--village-orange)] transition-colors">
-                          07975 708289
-                        </span>
-                      </a>
-
-                      <div className="flex items-start group">
-                        <div className="bg-[var(--village-green)]/10 p-2 rounded-full mr-3 mt-0.5 flex-shrink-0">
-                          <MapPin className="h-4 w-4 text-[var(--village-green)]" />
-                        </div>
-                        <span className="text-gray-700">
-                          155 Tulse Hill
-                          <br />
-                          London, SW2 3UP
-                        </span>
+                  <div className="space-y-3">
+                    <a href="mailto:enquiries@oasisstmartins.org" className="flex items-center group">
+                      <div className="p-1 rounded-full mr-3">
+                        <Mail className="h-5 w-5 text-[var(--village-green)]" />
                       </div>
+                      <span className="text-gray-700 group-hover:text-[var(--village-green)] transition-colors">
+                        enquiries@oasisstmartins.org
+                      </span>
+                    </a>
+
+                    <a href="tel:02045243260" className="flex items-center group">
+                      <div className="p-1 rounded-full mr-3">
+                        <Phone className="h-5 w-5 text-[var(--village-green)]" />
+                      </div>
+                      <span className="text-gray-700 group-hover:text-[var(--village-green)] transition-colors">
+                        0204 524 3260
+                      </span>
+                    </a>
+
+                    <div className="flex items-start group">
+                      <div className="p-1 rounded-full mr-3 mt-0.5 flex-shrink-0">
+                        <MapPin className="h-5 w-5 text-[var(--village-green)]" />
+                      </div>
+                      <span className="text-gray-700">
+                        155 Tulse Hill
+                        <br />
+                        London, SW2 3UP
+                      </span>
                     </div>
                   </div>
                 </div>

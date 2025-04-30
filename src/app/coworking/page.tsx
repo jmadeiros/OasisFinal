@@ -1,10 +1,11 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Check, ArrowLeft } from "lucide-react"
+import { Check, ArrowLeft, Briefcase, CalendarDays, HandHeart, Users } from "lucide-react"
 import Link from "next/link"
 import { inter } from "../fonts"
 import { useState } from "react"
+import Image from "next/image"
 
 export default function CoworkingPage() {
   const [expandedCards, setExpandedCards] = useState<number[]>([])
@@ -90,15 +91,24 @@ export default function CoworkingPage() {
     <main className="min-h-screen bg-[#f8f5f0]">
       {/* Header */}
       <div className="w-full py-12 md:py-16 bg-[#f0e9df]">
-        <div className="max-w-6xl mx-auto px-4 md:px-8">
+        <div className="container mx-auto px-6 md:px-12">
+          {/* Back Link */}
           <Link
             href="/"
-            className="inline-flex items-center text-gray-700 hover:text-[var(--village-green)] transition-colors mb-8"
+            className="inline-flex items-center text-gray-700 hover:text-[var(--village-green)] transition-colors mb-12 group"
           >
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to home
+            <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
+            <span className="relative overflow-hidden">
+              <span className="inline-block transition-transform group-hover:-translate-y-full duration-300">
+                Back to home
+              </span>
+              <span className="absolute top-0 left-0 translate-y-full transition-transform group-hover:translate-y-0 duration-300">
+                Return to main page
+              </span>
+            </span>
           </Link>
 
+          {/* Updated Title and Subtitle */}
           <motion.h1
             className={`text-5xl md:text-6xl font-bold leading-tight ${inter.className}`}
             initial={{ opacity: 0, y: 20 }}
@@ -108,55 +118,151 @@ export default function CoworkingPage() {
             <span
               className="block text-transparent bg-clip-text"
               style={{
-                background: "linear-gradient(to right, #4a7c59, #39a0a9)",
+                background: "linear-gradient(to right, var(--village-orange), var(--village-green))",
                 WebkitBackgroundClip: "text",
               }}
             >
-              Coworking Memberships
+              Ways to Join The Village
             </span>
           </motion.h1>
-
           <motion.p
             className="text-xl text-gray-700 mt-4 max-w-3xl"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            Choose from a variety of flexible coworking plans designed to meet your needs. All memberships include
-            access to our community events and high-speed internet.
+            Discover the various ways you can connect, work, and contribute at The Village.
           </motion.p>
         </div>
       </div>
 
       {/* Main content */}
-      <div className="max-w-6xl mx-auto px-4 md:px-8 py-16">
-        {/* Membership Plans */}
-        <motion.div
-          className="mb-16"
+      <div className="container mx-auto px-6 md:px-12 py-16 space-y-16 md:space-y-24">
+        {/* Other Spaces Section */}
+        <motion.section
+          className="grid md:grid-cols-2 gap-12 items-center bg-white p-8 md:p-12 rounded-xl shadow-md"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          <div>
+            <div className="flex items-center gap-3 mb-4">
+              <Briefcase className="w-8 h-8 text-[var(--village-orange)]" />
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-800 tracking-tight">Offices & Event Spaces</h2>
+            </div>
+            <p className="text-lg text-gray-700 mb-6">
+              Beyond coworking, The Village offers dedicated private offices for teams and versatile event spaces for
+              meetings, workshops, and gatherings.
+            </p>
+            <Link
+              href="/#frames-section"
+              className="inline-flex items-center px-6 py-3 bg-[var(--village-orange)] text-white font-medium rounded-md hover:bg-[var(--village-orange)]/90 transition-colors"
+            >
+              Explore All Spaces
+            </Link>
+          </div>
+          <div className="relative aspect-video rounded-lg overflow-hidden">
+            <Image 
+              src="/images/event-space-arched.png" 
+              alt="Event space at The Village"
+              fill 
+              className="object-cover"
+            />
+          </div>
+        </motion.section>
+
+        {/* Volunteer Section */}
+        <motion.section
+          className="grid md:grid-cols-2 gap-12 items-center bg-white p-8 md:p-12 rounded-xl shadow-md"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
         >
-          <div className="text-center space-y-6 max-w-3xl mx-auto mb-12">
-            <h2 className="text-3xl font-bold text-gray-800 tracking-tight">Membership Options</h2>
-            <p className="text-xl text-gray-700">
-              Choose the plan that works best for you. All memberships include access to our community events and
-              high-speed internet.
+           <div className="relative aspect-video rounded-lg overflow-hidden md:order-last">
+             <Image 
+               src="/images/community-conversation.jpeg" 
+               alt="Volunteers at The Village"
+               fill 
+               className="object-cover"
+             />
+          </div>
+          <div>
+            <div className="flex items-center gap-3 mb-4">
+              <HandHeart className="w-8 h-8 text-[var(--village-teal)]" />
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-800 tracking-tight">Volunteer With Us</h2>
+            </div>
+            <p className="text-lg text-gray-700 mb-6">
+              Become part of our vibrant community by volunteering your time and skills. Help us make a difference and
+              support our mission.
+            </p>
+            <Link
+              href="/volunteer"
+              className="inline-flex items-center px-6 py-3 border border-[var(--village-teal)] text-[var(--village-teal)] font-medium rounded-md hover:bg-[var(--village-teal)]/10 transition-colors"
+            >
+              Learn About Volunteering
+            </Link>
+          </div>
+        </motion.section>
+
+        {/* Community Events Section */}
+        <motion.section
+          className="grid md:grid-cols-2 gap-12 items-center bg-white p-8 md:p-12 rounded-xl shadow-md"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+        >
+          <div>
+            <div className="flex items-center gap-3 mb-4">
+              <Users className="w-8 h-8 text-[var(--village-gold)]" />
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-800 tracking-tight">Join Our Events</h2>
+            </div>
+            <p className="text-lg text-gray-700 mb-6">
+              Connect with fellow members and the wider Tulse Hill community through our regular events, workshops, and social gatherings. See what's coming up!
+            </p>
+            <Link
+              href="/community"
+              className="inline-flex items-center px-6 py-3 border border-[var(--village-gold)] text-[var(--village-gold)] font-medium rounded-md hover:bg-[var(--village-gold)]/10 transition-colors"
+            >
+              Explore Community & Events
+            </Link>
+          </div>
+          <div className="relative aspect-video rounded-lg overflow-hidden">
+            <Image 
+              src="/images/community-connection.jpeg" 
+              alt="Community event at The Village"
+              fill 
+              className="object-cover"
+            />
+          </div>
+        </motion.section>
+
+        {/* Coworking Section */}
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
+        >
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 tracking-tight mb-4">Flexible Coworking Plans</h2>
+            <p className="text-lg text-gray-700 max-w-2xl mx-auto">
+              Find the perfect coworking membership to suit your work style and budget.
             </p>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
             {membershipPlans.map((plan) => (
               <div
                 key={plan.id}
-                className={`relative rounded-xl overflow-hidden ${plan.popular ? "transform md:-translate-y-4" : ""}`}
+                className={`relative rounded-xl overflow-hidden ${plan.popular ? "transform md:-translate-y-4 shadow-lg" : "shadow-md"}`}
               >
                 {plan.popular && (
-                  <div className="absolute top-0 right-0 bg-[var(--village-teal)] text-white text-xs font-bold px-3 py-1 rounded-bl-lg">
+                  <div className="absolute top-0 right-0 bg-[var(--village-teal)] text-white text-xs font-bold px-3 py-1 rounded-bl-lg z-10">
                     MOST POPULAR
                   </div>
                 )}
-                <div className="bg-[#e0d9cf] border-t-4 p-8 h-full flex flex-col" style={{ borderColor: plan.color }}>
+                <div
+                  className="bg-white border-t-4 p-8 h-full flex flex-col"
+                  style={{ borderColor: plan.color === "var(--village-cream)" ? "var(--village-gold)" : plan.color }}
+                >
                   <h3 className="text-2xl font-bold mb-2" style={{ color: plan.color }}>
                     {plan.name}
                   </h3>
@@ -164,104 +270,45 @@ export default function CoworkingPage() {
                     <span className="text-3xl font-bold text-gray-800">{plan.price}</span>
                     <span className="text-gray-600 ml-1">{plan.period}</span>
                   </div>
-                  <p className="text-gray-700 mb-6">{plan.description}</p>
-                  <ul className="space-y-3 mb-8 flex-grow">
+                  <p className="text-gray-700 mb-6 text-sm">{plan.description}</p>
+                  <ul className="space-y-2 mb-8 flex-grow text-sm">
                     {plan.features.map((feature, i) => (
-                      <li key={i} className="flex items-start gap-2 text-gray-700">
-                        <Check className="w-5 h-5 mt-1 flex-shrink-0" style={{ color: plan.color }} />
+                      <li key={i} className="flex items-start gap-2 text-gray-600">
+                        <Check
+                          className="w-4 h-4 mt-0.5 flex-shrink-0"
+                          style={{ color: plan.color === "var(--village-cream)" ? "var(--village-gold)" : plan.color }}
+                        />
                         <span>{feature}</span>
                       </li>
                     ))}
                   </ul>
                   <button
-                    className="w-full py-3 rounded-lg font-medium transition-colors mt-auto"
+                    className="w-full py-2.5 rounded-lg font-medium text-sm transition-colors mt-auto"
                     style={{
-                      backgroundColor: `${plan.color}20`,
-                      color: plan.color,
-                      border: `1px solid ${plan.color}40`,
+                      backgroundColor: `${plan.color === "var(--village-cream)" ? "var(--village-gold)" : plan.color}20`,
+                      color: plan.color === "var(--village-cream)" ? "var(--village-gold)" : plan.color,
+                      border: `1px solid ${plan.color === "var(--village-cream)" ? "var(--village-gold)" : plan.color}40`,
                     }}
                     onClick={scrollToBooking}
                   >
-                    Choose {plan.name}
+                    Enquire about {plan.name}
                   </button>
                 </div>
               </div>
             ))}
           </div>
-        </motion.div>
+        </motion.section>
 
-        {/* Additional Sections */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mt-20">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-          >
-            <h2 className="text-3xl font-bold mb-6 text-gray-800">Why Choose Our Coworking Space?</h2>
-            <p className="text-lg text-gray-700 mb-6">
-              At The Village, we believe in creating more than just a workspace. Our coworking environment is designed
-              to foster creativity, productivity, and meaningful connections.
-            </p>
-            <p className="text-lg text-gray-700 mb-6">
-              Whether you're a freelancer, remote worker, or small team, we have the perfect membership option to suit
-              your needs.
-            </p>
-            <ul className="space-y-4">
-              <li className="flex items-start gap-3">
-                <Check className="w-6 h-6 mt-1 text-[var(--village-green)]" />
-                <div>
-                  <h3 className="text-xl font-medium text-gray-800 mb-1">Flexible Terms</h3>
-                  <p className="text-gray-700">
-                    No long-term commitments required. Choose the plan that works for you.
-                  </p>
-                </div>
-              </li>
-              <li className="flex items-start gap-3">
-                <Check className="w-6 h-6 mt-1 text-[var(--village-teal)]" />
-                <div>
-                  <h3 className="text-xl font-medium text-gray-800 mb-1">Community Events</h3>
-                  <p className="text-gray-700">Regular networking opportunities, workshops, and social gatherings.</p>
-                </div>
-              </li>
-              <li className="flex items-start gap-3">
-                <Check className="w-6 h-6 mt-1 text-[var(--village-orange)]" />
-                <div>
-                  <h3 className="text-xl font-medium text-gray-800 mb-1">Premium Amenities</h3>
-                  <p className="text-gray-700">High-speed internet, meeting rooms, printing services, and more.</p>
-                </div>
-              </li>
-            </ul>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            className="relative"
-          >
-            <img
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202025-02-16%20200107-gVqZVuyGJqddxwjqbjYWa403iLIRCG.png"
-              alt="The Village Coworking Space"
-              className="rounded-xl shadow-md w-full h-full object-cover"
-            />
-            <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/70 to-transparent">
-              <p className="text-white font-medium text-lg">
-                Experience the perfect balance of community and productivity
-              </p>
-            </div>
-          </motion.div>
-        </div>
-
-        {/* CTA */}
+        {/* Retained CTA section at the bottom */}
         <motion.div
-          className="text-center mt-24 bg-[#e0d9cf] p-12 rounded-xl"
+          className="text-center mt-16 md:mt-24 bg-[#e0d9cf] p-8 md:p-12 rounded-xl shadow-inner"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.6 }}
         >
-          <h2 className="text-3xl font-bold mb-6 text-gray-800">Ready to Join Our Coworking Community?</h2>
+          <h2 className="text-3xl font-bold mb-6 text-gray-800">Ready to Join Our Community?</h2>
           <p className="text-lg text-gray-700 mb-8 max-w-2xl mx-auto">
-            Book a tour to experience our coworking space firsthand or contact us to discuss custom membership options.
+            Book a tour to experience our spaces firsthand or contact us to discuss membership or volunteering options.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <button

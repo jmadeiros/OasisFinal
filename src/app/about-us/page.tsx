@@ -12,10 +12,13 @@ import {
   Users2,
   BookOpen,
   Globe,
+  Check,
 } from "lucide-react"
 import Link from "next/link"
 import { inter } from "../fonts"
 import { useState, useRef, useEffect } from "react"
+import Image from "next/image"
+import type { ReactElement } from 'react'
 
 // Add this CSS class to hide scrollbars
 const style = {
@@ -28,54 +31,78 @@ const style = {
   },
 }
 
+// Define TypeScript interfaces for data structures
+interface Value {
+  name: string
+  description: string
+  color: string
+}
+
+interface Habit {
+  name: string
+  color: string
+}
+
+interface ImpactMetric {
+  figure: string
+  label: string
+  description: string
+  icon: ReactElement
+  color: string
+}
+
+interface Testimonial {
+  quote: string
+  author: string
+  image: string
+}
+
 export default function AboutUsPage() {
   // Add state to track which value is selected
   const [selectedValue, setSelectedValue] = useState<string | null>(null)
+  const [currentTestimonialIndex, setCurrentTestimonialIndex] = useState(0)
 
-  // Add these state variables inside the component
-  const [activeHabitIndex, setActiveHabitIndex] = useState(0)
-  const [activeMetricIndex, setActiveMetricIndex] = useState(0)
-  const [activeTestimonialIndex, setActiveTestimonialIndex] = useState(0)
+  const valuesScrollRef = useRef<HTMLDivElement>(null)
   const habitsScrollRef = useRef<HTMLDivElement>(null)
   const metricsScrollRef = useRef<HTMLDivElement>(null)
   const testimonialsScrollRef = useRef<HTMLDivElement>(null)
 
   // Define the values with their descriptions
-  const values = [
+  const values: Value[] = [
     {
       name: "A passion to include",
       description:
-        "We believe everyone should be included in the benefits, resources and opportunities available to all. We're committed to serving and engaging with everyone in our communities, especially the most vulnerable.",
+        "We believe everyone should be included in the benefits, resources and opportunities available to all. We&apos;re committed to serving and engaging with everyone in our communities, especially the most vulnerable.",
       color: "var(--village-green)",
     },
     {
       name: "A sense of hope",
       description:
-        "We have a deep-seated belief that things can change, be transformed and improved. We're committed to identifying and developing potential in people and communities, and to working for justice and equity.",
+        "We have a deep-seated belief that things can change, be transformed and improved. We&apos;re committed to identifying and developing potential in people and communities, and to working for justice and equity.",
       color: "var(--village-teal)",
     },
     {
       name: "A commitment to persevere",
       description:
-        "We won't give up on people or communities. We're committed to finding solutions to problems, to learning from our mistakes and to building on our successes.",
+        "We won&apos;t give up on people or communities. We&apos;re committed to finding solutions to problems, to learning from our mistakes and to building on our successes.",
       color: "var(--village-orange)",
     },
     {
       name: "A willingness to work together",
       description:
-        "We believe in the power of community and collaboration. We're committed to working with others, to sharing our resources and to learning from one another.",
+        "We believe in the power of community and collaboration. We&apos;re committed to working with others, to sharing our resources and to learning from one another.",
       color: "var(--village-gold)",
     },
     {
       name: "A determination to act",
       description:
-        "We're committed to taking practical action to address injustice and to meet the needs of communities. We believe in being the change we want to see in the world.",
+        "We&apos;re committed to taking practical action to address injustice and to meet the needs of communities. We believe in being the change we want to see in the world.",
       color: "var(--village-green)",
     },
   ]
 
   // Define the 9 habits with their colors
-  const habits = [
+  const habits: Habit[] = [
     { name: "Compassionate", color: "#dc3545" }, // Red
     { name: "Joyful", color: "#ffc107" }, // Yellow
     { name: "Considerate", color: "#fd7e14" }, // Orange
@@ -88,7 +115,7 @@ export default function AboutUsPage() {
   ]
 
   // Define impact metrics
-  const impactMetrics = [
+  const impactMetrics: ImpactMetric[] = [
     {
       figure: "40",
       label: "Oasis Communities in the UK",
@@ -112,107 +139,81 @@ export default function AboutUsPage() {
     },
   ]
 
-  // Define testimonials
-  const testimonials = [
+  // Define testimonials with explicit type
+  const testimonials: Testimonial[] = [
     {
       quote:
         "Oasis has transformed our local community. Their commitment to inclusion and creating spaces where everyone can thrive has led to partnerships and opportunities we never would have imagined possible.",
       author: "Sarah J., Community Leader",
-      organization: "Brixton Neighborhood Association",
+      image: "/images/placeholder-person1.jpg", // Placeholder image
     },
     {
       quote:
         "Being part of the Oasis family has been life-changing for our students. The holistic approach to education and community development has created an environment where young people truly flourish.",
       author: "Marcus T., Headteacher",
-      organization: "Oasis Academy Southbank",
+      image: "/images/placeholder-person2.jpg", // Placeholder image
     },
   ]
 
-  // Function to toggle selected value
   const toggleValue = (valueName: string) => {
-    if (selectedValue === valueName) {
-      setSelectedValue(null)
-    } else {
-      setSelectedValue(valueName)
-    }
-  }
-
-  // Add these functions inside the component
-  const scrollToHabit = (index: number) => {
-    if (!habitsScrollRef.current) return
-    const itemWidth = 120 + 12 // width + gap
-    habitsScrollRef.current.scrollTo({
-      left: index * itemWidth,
-      behavior: "smooth",
-    })
-    setActiveHabitIndex(index)
-  }
-
-  const scrollToMetric = (index: number) => {
-    if (!metricsScrollRef.current) return
-    const itemWidth = 250 + 24 // width + gap
-    metricsScrollRef.current.scrollTo({
-      left: index * itemWidth,
-      behavior: "smooth",
-    })
-    setActiveMetricIndex(index)
+    setSelectedValue((prev) => (prev === valueName ? null : valueName))
   }
 
   const scrollToTestimonial = (index: number) => {
     if (!testimonialsScrollRef.current) return
-    const itemWidth = 350 + 32 // width + gap
+    const itemWidth = testimonialsScrollRef.current.offsetWidth
     testimonialsScrollRef.current.scrollTo({
       left: index * itemWidth,
       behavior: "smooth",
     })
-    setActiveTestimonialIndex(index)
+    setCurrentTestimonialIndex(index)
   }
 
-  // Add these useEffect hooks inside the component
-  useEffect(() => {
-    const habitsContainer = habitsScrollRef.current
-    if (!habitsContainer) return
-
+  // Handle scroll for habits (if needed for future features)
     const handleHabitsScroll = () => {
-      const { scrollLeft } = habitsContainer
-      const itemWidth = 120 + 12 // width + gap
-      const index = Math.round(scrollLeft / itemWidth)
-      setActiveHabitIndex(Math.min(index, habits.length - 1))
-    }
+    if (!habitsScrollRef.current) return
+    const { scrollLeft } = habitsScrollRef.current
+    const itemWidth = habitsScrollRef.current.children[0]?.clientWidth || 0
+    const index = Math.round(scrollLeft / (itemWidth + 16)) // Adjust gap (gap-4)
+  }
 
-    habitsContainer.addEventListener("scroll", handleHabitsScroll)
-    return () => habitsContainer.removeEventListener("scroll", handleHabitsScroll)
-  }, [habits.length])
-
-  useEffect(() => {
-    const metricsContainer = metricsScrollRef.current
-    if (!metricsContainer) return
-
+  // Handle scroll for metrics (if needed for future features)
     const handleMetricsScroll = () => {
-      const { scrollLeft } = metricsContainer
-      const itemWidth = 250 + 24 // width + gap
+    if (!metricsScrollRef.current) return
+    const { scrollLeft } = metricsScrollRef.current
+    const itemWidth = metricsScrollRef.current.children[0]?.clientWidth || 0
+    const index = Math.round(scrollLeft / (itemWidth + 24)) // Adjust gap (gap-6)
+  }
+
+  // Handle scroll for testimonials
+  const handleTestimonialsScroll = () => {
+    if (!testimonialsScrollRef.current) return
+    const { scrollLeft } = testimonialsScrollRef.current
+    const itemWidth = testimonialsScrollRef.current.offsetWidth
       const index = Math.round(scrollLeft / itemWidth)
-      setActiveMetricIndex(Math.min(index, impactMetrics.length - 1))
+    setCurrentTestimonialIndex(index)
     }
 
-    metricsContainer.addEventListener("scroll", handleMetricsScroll)
-    return () => metricsContainer.removeEventListener("scroll", handleMetricsScroll)
-  }, [impactMetrics.length])
+  // Auto-scroll testimonials
+  useEffect(() => {
+    if (testimonials && testimonials.length > 0) { // Check if testimonials exist
+      const timer = setInterval(() => {
+        setCurrentTestimonialIndex((prevIndex) => (prevIndex + 1) % testimonials.length)
+      }, 5000) // Change testimonial every 5 seconds
+
+      return () => clearInterval(timer)
+    }
+  }, [testimonials.length])
 
   useEffect(() => {
-    const testimonialsContainer = testimonialsScrollRef.current
-    if (!testimonialsContainer) return
-
-    const handleTestimonialsScroll = () => {
-      const { scrollLeft } = testimonialsContainer
-      const itemWidth = 350 + 32 // width + gap
-      const index = Math.round(scrollLeft / itemWidth)
-      setActiveTestimonialIndex(Math.min(index, testimonials.length - 1))
+    if (testimonialsScrollRef.current) {
+      const itemWidth = testimonialsScrollRef.current.offsetWidth
+      testimonialsScrollRef.current.scrollTo({
+        left: currentTestimonialIndex * itemWidth,
+        behavior: "smooth",
+      })
     }
-
-    testimonialsContainer.addEventListener("scroll", handleTestimonialsScroll)
-    return () => testimonialsContainer.removeEventListener("scroll", handleTestimonialsScroll)
-  }, [testimonials.length])
+  }, [currentTestimonialIndex])
 
   return (
     <main className="min-h-screen bg-[#f8f5f0]">
@@ -220,21 +221,31 @@ export default function AboutUsPage() {
       <div className="w-full py-16 md:py-24 bg-[#f0e9df] relative">
         {/* Logo positioned on the right - enlarged and partially visible */}
         <div className="absolute right-[15%] top-1/2 transform -translate-y-1/2 hidden md:block">
-          <img
+          <Image
             src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/oasis-logo-Qm57dhfdgogMg1T0XTeO6c3zyO8Acx.svg"
             alt="Oasis Logo"
-            className="h-[800px] w-[800px] object-contain"
+            width={800}
+            height={800}
+            className="object-contain"
             aria-hidden="true"
+            priority
           />
         </div>
 
         <div className="container mx-auto px-6 md:px-12 relative z-10">
           <Link
             href="/"
-            className="inline-flex items-center text-gray-700 hover:text-[var(--village-green)] transition-colors mb-8"
+            className="inline-flex items-center text-gray-700 hover:text-[var(--village-green)] transition-colors mb-8 group"
           >
-            <ArrowLeft className="mr-2 h-4 w-4" />
+            <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
+            <span className="relative overflow-hidden">
+              <span className="inline-block transition-transform group-hover:-translate-y-full duration-300">
             Back to home
+              </span>
+              <span className="absolute top-0 left-0 translate-y-full transition-transform group-hover:translate-y-0 duration-300">
+                Return to main page
+              </span>
+            </span>
           </Link>
 
           <motion.h1
@@ -255,14 +266,12 @@ export default function AboutUsPage() {
           </motion.h1>
 
           <motion.p
-            className="hidden md:flex text-lg md:text-xl text-gray-700 max-w-xl mt-6 mr-auto flex-col"
+            className="text-lg md:text-xl text-gray-700 max-w-xl mt-6 mr-auto"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <span>The Village is a vibrant community workspace</span>
-            <span>where people connect, create, and collaborate</span>
-            <span>in the heart of Tulse Hill.</span>
+            The Oasis vision is for community – a place where everyone is included, making a contribution, and reaching their God-given potential.
           </motion.p>
         </div>
       </div>
@@ -286,14 +295,14 @@ export default function AboutUsPage() {
               </div>
 
               <p className="text-lg text-gray-700 mb-6 leading-relaxed">
-                We're a diverse collective of organizations and individuals committed to creating positive change in our
+                We&apos;re a diverse collective of organizations and individuals committed to creating positive change in our
                 community. Our mission is to provide a platform for business, education, and community development that
                 serves the local area and its people.
               </p>
 
               <p className="text-lg text-gray-700 leading-relaxed">
                 We believe in the power of collaboration and shared resources to create meaningful impact. As part of
-                the Oasis family, we're committed to creating inclusive spaces where everyone can thrive.
+                the Oasis family, we&apos;re committed to creating inclusive spaces where everyone can thrive.
               </p>
             </motion.div>
 
@@ -304,10 +313,12 @@ export default function AboutUsPage() {
               transition={{ duration: 0.5, delay: 0.3 }}
             >
               <div className="relative w-full max-w-md aspect-square rounded-2xl overflow-hidden shadow-xl">
-                <img
+                <Image
                   src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Smiling_girls-978Fdn69XiZXIrMO4DJ8qicwhnHfQM.jpeg"
                   alt="Oasis Academy students smiling together"
-                  className="w-full h-full object-cover"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
                 />
               </div>
             </motion.div>
@@ -318,17 +329,19 @@ export default function AboutUsPage() {
       {/* Mission Section with Accent Background */}
       <div className="py-16 bg-[#f0e9df]">
         <div className="container mx-auto px-6 md:px-12 relative">
-          {/* NOLO Image - Left Side */}
+          {/* Community Image - Left Side */}
           <motion.div
             className="absolute left-[-100px] top-20 hidden xl:block z-10"
             initial={{ opacity: 0, x: -40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 0.4 }}
           >
-            <img
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/NOLO.PNG-tyHVCpEl9q0zzbPJ4Qq6HYRmWGHVNK.png"
-              alt="No One Left Out"
-              className="w-[400px] h-auto rounded-xl shadow-lg"
+            <Image
+              src="/images/community-conversation.jpeg"
+              alt="Community conversation at Oasis"
+              width={400}
+              height={267}
+              className="object-cover rounded-xl shadow-lg"
               style={{ boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1)" }}
             />
           </motion.div>
@@ -340,10 +353,12 @@ export default function AboutUsPage() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 0.4 }}
           >
-            <img
+            <Image
               src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/NOLO%203.jpg-SR2Q622LpQUmkoNfRvBwmGFuJebKLq.jpeg"
               alt="Oasis community event"
-              className="w-[400px] h-auto rounded-xl shadow-lg"
+              width={400}
+              height={267}
+              className="object-cover rounded-xl shadow-lg"
               style={{ boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1)" }}
             />
           </motion.div>
@@ -368,8 +383,8 @@ export default function AboutUsPage() {
             </p>
 
             <div className="text-xl font-medium text-[var(--village-orange)] mb-6 px-6 py-4 border-l-4 border-r-4 border-[var(--village-orange)] mx-auto max-w-2xl">
-              "We work to create communities where everyone is included, making a contribution and reaching their full
-              potential."
+              &quot;We work to create communities where everyone is included, making a contribution and reaching their full
+              potential.&quot;
             </div>
 
             <p className="text-lg text-gray-700 leading-relaxed">
@@ -427,27 +442,16 @@ export default function AboutUsPage() {
                               height: "auto",
                               opacity: 1,
                               transition: {
-                                height: {
-                                  duration: 0.3,
-                                  ease: [0.04, 0.62, 0.23, 0.98],
-                                },
-                                opacity: {
-                                  duration: 0.2,
-                                  delay: 0.1,
-                                },
+                                height: { duration: 0.3, ease: "easeOut" },
+                                opacity: { duration: 0.2, delay: 0.1 },
                               },
                             }}
                             exit={{
                               height: 0,
                               opacity: 0,
                               transition: {
-                                height: {
-                                  duration: 0.3,
-                                  ease: [0.04, 0.62, 0.23, 0.98],
-                                },
-                                opacity: {
-                                  duration: 0.1,
-                                },
+                                height: { duration: 0.3, ease: "easeIn" },
+                                opacity: { duration: 0.1 },
                               },
                             }}
                           >
@@ -491,7 +495,9 @@ export default function AboutUsPage() {
 
                 <div className="flex justify-end">
                   <Link
-                    href="/#contact"
+                    href="https://www.oasisuk.org/"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="px-6 py-3 bg-[var(--village-gold)] text-white font-medium rounded-md hover:bg-[var(--village-gold)]/90 transition-colors"
                   >
                     Learn More About Us
@@ -618,7 +624,7 @@ export default function AboutUsPage() {
 
             <div className="max-w-3xl mx-auto bg-[#f8f5f0] p-8 rounded-2xl shadow-md border border-gray-100 mb-10">
               <p className="text-xl text-gray-700 leading-relaxed">
-                <span className="font-semibold">For 35 years</span> Oasis has been helping to build community where
+                <span className="font-semibold">For 40 years</span> Oasis has been helping to build community where
                 everyone can thrive. We work to end disadvantage and create opportunity for all, providing education,
                 housing, health, justice, youth and family support.
               </p>
@@ -657,76 +663,79 @@ export default function AboutUsPage() {
                     transition={{ duration: 0.4, delay: 0.1 * index }}
                     whileHover={{ y: -10, transition: { duration: 0.2 } }}
                   >
-                    <div className="p-6">
-                      <div className="flex items-center mb-4">
-                        <div className="p-2 rounded-full mr-3" style={{ backgroundColor: metric.color }}>
+                    <div className="p-6" style={{ backgroundColor: `${metric.color}1A` }}>
+                      <div
+                        className="w-12 h-12 rounded-full flex items-center justify-center mb-4"
+                        style={{ backgroundColor: metric.color }}
+                      >
                           {metric.icon}
-                        </div>
-                        <h3 className="text-xl font-medium text-gray-800">{metric.label}</h3>
                       </div>
-                      <div className="text-5xl font-bold mb-3" style={{ color: metric.color }}>
+                      <div className="text-3xl font-bold" style={{ color: metric.color }}>
                         {metric.figure}
                       </div>
-                      <p className="text-gray-600">{metric.description}</p>
+                      <h3 className="text-lg font-semibold text-gray-800 mt-1 mb-2">{metric.label}</h3>
+                      <p className="text-sm text-gray-600">{metric.description}</p>
                     </div>
                   </motion.div>
                 ))}
               </div>
-            </div>
-
-            {/* Replace pagination dots with swipe indicator text */}
-            <div className="flex justify-center mt-4 md:hidden">
-              <p className="text-sm text-gray-500 italic">Swipe to explore</p>
             </div>
           </div>
 
-          {/* Testimonials */}
-          <div className="md:overflow-visible">
+          {/* Testimonials Section */}
+          <motion.div
+            className="text-center mb-12 mt-16"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+          >
+            <h2 className={`text-3xl font-bold mb-4 text-gray-800 ${inter.className}`}>What Our Community Says</h2>
+          </motion.div>
+
+          <div className="relative">
             <div
               ref={testimonialsScrollRef}
-              className="overflow-x-auto hide-scrollbar md:overflow-visible -mx-6 px-6 md:mx-0 md:px-0"
-              style={{ scrollbarWidth: "none", WebkitOverflowScrolling: "touch" }}
+              onScroll={handleTestimonialsScroll}
+              className="overflow-x-auto hide-scrollbar py-8 px-4 snap-x snap-mandatory scroll-smooth"
+              style={{ scrollbarWidth: "none" }}
             >
-              <div className="flex md:grid md:grid-cols-2 gap-8 w-[800px] md:w-auto">
+              <div className="flex space-x-8 w-max pb-4">
                 {testimonials.map((testimonial, index) => (
                   <motion.div
                     key={index}
-                    className="bg-white rounded-2xl p-8 shadow-md border border-gray-100 flex-shrink-0 w-[350px] md:w-auto"
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.5, delay: 0.2 * index }}
+                    className={`flex-shrink-0 w-[80vw] md:w-[50vw] lg:w-[40vw] snap-center bg-[#f0e9df] p-8 rounded-xl shadow-md transition-opacity duration-300 ${
+                      index === currentTestimonialIndex ? "opacity-100" : "opacity-60"
+                    }`}
+                    initial={{ opacity: 0, x: 50 }}
+                    animate={{ opacity: index === currentTestimonialIndex ? 1 : 0.6, x: 0 }}
+                    transition={{ duration: 0.5, delay: 0.1 * index }}
                   >
-                    <div className="flex items-start mb-6">
-                      <div className="bg-[var(--village-orange)] p-2 rounded-full mr-4 mt-1">
-                        <MessageSquareQuote className="h-5 w-5 text-white" />
-                      </div>
-                      <p className="text-lg text-gray-700 italic leading-relaxed">"{testimonial.quote}"</p>
-                    </div>
-                    <div className="ml-12">
-                      <p className="font-medium text-gray-800">{testimonial.author}</p>
-                      <p className="text-sm text-gray-600">{testimonial.organization}</p>
+                    <p className="text-lg italic text-gray-700 mb-4">&quot;{testimonial.quote}&quot;</p>
+                    <div className="flex items-center mt-4">
+                      <Image
+                        src={testimonial.image}
+                        alt={testimonial.author}
+                        width={40}
+                        height={40}
+                        className="rounded-full mr-3"
+                      />
+                      <p className="font-semibold text-gray-800">— {testimonial.author}</p>
                     </div>
                   </motion.div>
                 ))}
               </div>
             </div>
-
-            {/* Pagination dots - only visible on mobile */}
-            <div className="flex justify-center mt-4 space-x-2 md:hidden">
+            {/* Navigation Dots */}
+            <div className="flex justify-center mt-4 space-x-2">
               {testimonials.map((_, index) => (
                 <button
                   key={index}
                   className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
-                    activeTestimonialIndex === index ? "bg-[var(--village-orange)] w-5" : "bg-gray-300"
+                    currentTestimonialIndex === index ? "bg-[var(--village-orange)] w-5" : "bg-gray-300"
                   }`}
                   onClick={() => scrollToTestimonial(index)}
-                  aria-label={`View testimonial ${index + 1}`}
                 />
               ))}
-            </div>
-
-            <div className="flex justify-center mt-2 md:hidden">
-              <p className="text-sm text-gray-500 italic">Swipe to explore</p>
             </div>
           </div>
         </div>
@@ -744,8 +753,8 @@ export default function AboutUsPage() {
             <div>
               <h2 className={`text-3xl font-bold mb-6 text-gray-800 ${inter.className}`}>Join Our Community</h2>
               <p className="text-lg text-gray-700 mb-6 leading-relaxed">
-                Whether you're looking for a workspace, want to host an event, or are interested in becoming a partner,
-                we'd love to hear from you. The Village is always open to new members who share our vision for a
+                Whether you&apos;re looking for a workspace, want to host an event, or are interested in becoming a partner,
+                we&apos;d love to hear from you. The Village is always open to new members who share our vision for a
                 collaborative, supportive community.
               </p>
             </div>
@@ -754,7 +763,7 @@ export default function AboutUsPage() {
               <h3 className="text-xl font-medium text-gray-800 mb-6">Ready to get started?</h3>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
-                  href="/#booking-form"
+                  href="/book-tour"
                   className="px-6 py-3 bg-[var(--village-green)] text-white font-medium rounded-md hover:bg-[var(--village-green)]/90 transition-colors"
                 >
                   Book a Tour

@@ -691,7 +691,7 @@ export default function BuiltForCommunity() {
                   custom={0}
                 >
                   {/* Modify the title heading */}
-                  <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight tracking-tight">
+                  <h2 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-bold leading-tight tracking-tight">
                     <span
                       className="block text-transparent bg-clip-text pb-2"
                       style={{
@@ -887,15 +887,14 @@ export default function BuiltForCommunity() {
 
                       <div>
                         <p className="text-base text-gray-700 leading-relaxed font-light mb-3">
-                          We believe every child deserves the chance to thrive — especially those who feel lost, left
+                          We believe every child deserves the chance to thrive, especially those who feel lost, left
                           out, or let down by mainstream education. But we also know that thriving children can only
                           come from thriving communities.
                         </p>
 
                         <p className="text-base text-gray-700 leading-relaxed font-light mb-3">
                           <span className="text-[var(--village-teal)] font-medium">Our vision</span> is to build a
-                          village that nurtures possibility — a place where hope and direction are part of everyday
-                          life.
+                          village that nurtures possibility, a place where hope and direction are part of everyday life.
                         </p>
 
                         <p className="text-base text-gray-700 leading-relaxed font-light">
@@ -932,7 +931,7 @@ export default function BuiltForCommunity() {
                       <div>
                         <p className="text-base text-gray-700 leading-relaxed font-light mb-3">
                           Oasis St Martin's Village builds on a powerful legacy. In 1699, a school for girls was founded
-                          by Thomas Tenison — a radical act in a time when few believed in educating girls. Today, we
+                          by Thomas Tenison, a radical act in a time when few believed in educating girls. Today, we
                           carry that same spirit forward.
                         </p>
 
@@ -971,14 +970,19 @@ export default function BuiltForCommunity() {
 
                       <div>
                         <p className="text-base text-gray-700 leading-relaxed font-light mb-3">
-                          We're not a conventional school — we're a village. A place where education meets community. We
-                          believe it takes more than a classroom to raise a child — it takes connection, trust, and
-                          shared responsibility.
+                          We're not a conventional school, <span className="text-[var(--village-gold)] font-medium">we're a Village</span>. A place where education meets community. We believe
+                          it takes more than a classroom to raise a child, it takes connection, trust, and shared
+                          responsibility. Our work is grounded in radical inclusion. We believe every person holds unique worth
+                          regardless of background, behaviour, or circumstances. Everyone matters. Everyone belongs.
                         </p>
 
                         <p className="text-base text-gray-700 leading-relaxed font-light">
-                          Our work is grounded in radical inclusion. We believe every person holds unique worth —
-                          regardless of background, behaviour, or circumstances. Everyone matters. Everyone belongs.
+                          That's why we work alongside families, local services, and partners to build a nurturing ecosystem
+                          around each child. That belief drives us to challenge exclusion and inequality wherever it exists. And
+                          because we know that thriving children come from thriving communities, we're also creating shared
+                          spaces including co-working that strengthen connection, collaboration, and opportunity for the
+                          families and people around them. Our approach combines education, community development, and social
+                          support in one integrated model.
                         </p>
                       </div>
                     </div>
@@ -1092,14 +1096,14 @@ export default function BuiltForCommunity() {
 
                 <div>
                   <p className="text-lg text-gray-700 leading-relaxed font-light mb-4">
-                    We believe every child deserves the chance to thrive — especially those who feel lost, left out, or
+                    We believe every child deserves the chance to thrive, especially those who feel lost, left out, or
                     let down by mainstream education. But we also know that thriving children can only come from
                     thriving communities.
                   </p>
 
                   <p className="text-lg text-gray-700 leading-relaxed font-light mb-4">
                     <span className="text-[var(--village-teal)] font-medium">Our vision</span> is to build a village
-                    that nurtures possibility — a place where hope and direction are part of everyday life.
+                    that nurtures possibility, a place where hope and direction are part of everyday life.
                   </p>
 
                   <p className="text-lg text-gray-700 leading-relaxed font-light">
@@ -1144,21 +1148,21 @@ export default function BuiltForCommunity() {
                 <div>
                   <p className="text-lg text-gray-700 leading-relaxed font-light mb-4">
                     Oasis St Martin's Village builds on a powerful legacy. In 1699, a school for girls was founded by
-                    Thomas Tenison — a radical act in a time when few believed in educating girls. Today, we carry that
+                    Thomas Tenison, a radical act in a time when few believed in educating girls. Today, we carry that
                     same spirit forward.
                   </p>
 
                   <p className="text-lg text-gray-700 leading-relaxed font-light mb-4">
                     <span className="text-[var(--village-orange)] font-medium">We exist</span> to take on the challenges
                     too many young people face: exclusion, absence, unmet special needs, and mental health struggles.
-                    Our mission is to provide support that's personal, flexible, and focused on the whole child — with a
+                    Our mission is to provide support that's personal, flexible, and focused on the whole child with a
                     special, but not exclusive, focus on girls.
                   </p>
 
                   <p className="text-lg text-gray-700 leading-relaxed font-light">
                     And because we know that thriving children come from thriving communities, we're also creating
-                    shared spaces — including co-working — that strengthen connection, collaboration, and opportunity
-                    for the families and people around them.
+                    shared spaces including co-working that strengthen connection, collaboration, and opportunity for
+                    the families and people around them.
                   </p>
                 </div>
               </div>
@@ -1199,23 +1203,20 @@ export default function BuiltForCommunity() {
 
               <div className="space-y-3">
                 <p className="text-lg text-gray-700 leading-relaxed font-light">
-                  We're not a conventional school — we're a village. A place where education meets community. We believe
-                  it takes more than a classroom to raise a child — it takes connection, trust, and shared
+                  We're not a conventional school, <span className="text-[var(--village-gold)] font-medium">we're a Village</span>. A place where education meets community. We believe
+                  it takes more than a classroom to raise a child, it takes connection, trust, and shared
                   responsibility. Our work is grounded in radical inclusion. We believe every person holds unique worth
-                  — regardless of background, behaviour, or circumstances. Everyone matters. Everyone belongs.
+                  regardless of background, behaviour, or circumstances. Everyone matters. Everyone belongs.
                 </p>
 
-                <div className="relative pl-6">
-                  <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-[var(--village-gold)]/30 to-transparent rounded-full"></div>
-                  <p className="text-lg text-gray-700 leading-relaxed font-light">
-                    That's why we work alongside families, local services, and partners to build a nurturing ecosystem
-                    around each child. That belief drives us to challenge exclusion and inequality wherever it exists.
-                    And because we know that thriving children come from thriving communities, we're also creating
-                    shared spaces — including co-working — that strengthen connection, collaboration, and opportunity
-                    for the families and people around them. Our approach combines education, community development, and
-                    social support in one integrated model.
-                  </p>
-                </div>
+                <p className="text-lg text-gray-700 leading-relaxed font-light">
+                  That's why we work alongside families, local services, and partners to build a nurturing ecosystem
+                  around each child. That belief drives us to challenge exclusion and inequality wherever it exists. And
+                  because we know that thriving children come from thriving communities, we're also creating shared
+                  spaces including co-working that strengthen connection, collaboration, and opportunity for the
+                  families and people around them. Our approach combines education, community development, and social
+                  support in one integrated model.
+                </p>
               </div>
             </div>
           </motion.div>

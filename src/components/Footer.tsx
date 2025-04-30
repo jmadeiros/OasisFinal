@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Instagram, Linkedin, Phone, MapPin } from "lucide-react"
+import { Instagram, Linkedin, Phone, MapPin, Mail } from "lucide-react"
 
 export default function Footer() {
   return (
@@ -9,11 +9,6 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-4 text-[var(--village-green)]">The Village</h3>
             <ul className="space-y-3 sm:space-y-2">
-              <li>
-                <Link href="/" className="text-gray-600 hover:text-[var(--village-green)] transition duration-300">
-                  Home
-                </Link>
-              </li>
               <li>
                 <Link
                   href="/about-us"
@@ -30,14 +25,22 @@ export default function Footer() {
                   Our History
                 </Link>
               </li>
+              <li>
+                <Link
+                  href="/community"
+                  className="text-gray-600 hover:text-[var(--village-green)] transition duration-300"
+                >
+                  Community
+                </Link>
+              </li>
             </ul>
           </div>
           <div>
-            <h3 className="text-lg font-semibold mb-4 text-[var(--village-green)]">Spaces</h3>
+            <h3 className="text-lg font-semibold mb-4 text-[var(--village-green)]">Our Spaces</h3>
             <ul className="space-y-3 sm:space-y-2">
               <li>
                 <Link
-                  href="/coworking"
+                  href="/#frames-section"
                   className="text-gray-600 hover:text-[var(--village-green)] transition duration-300"
                 >
                   Coworking
@@ -45,15 +48,15 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/community"
+                  href="/#frames-section"
                   className="text-gray-600 hover:text-[var(--village-green)] transition duration-300"
                 >
-                  Community Hub
+                  Office Space
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/#spaces-section"
+                  href="/#frames-section"
                   className="text-gray-600 hover:text-[var(--village-green)] transition duration-300"
                 >
                   Event Spaces
@@ -103,7 +106,16 @@ export default function Footer() {
               </li>
               <li className="flex items-center">
                 <Phone className="w-5 h-5 text-[var(--village-green)] mr-2" />
-                <span className="text-gray-600">+44 (0) 7758 822426</span>
+                <span className="text-gray-600">0204 524 3260</span>
+              </li>
+              <li className="flex items-center">
+                <Mail className="w-5 h-5 text-[var(--village-green)] mr-2" />
+                <a 
+                  href="mailto:enquiries@oasisstmartins.org" 
+                  className="text-gray-600 hover:text-[var(--village-green)] transition duration-300"
+                >
+                  enquiries@oasisstmartins.org
+                </a>
               </li>
             </ul>
             <div className="flex space-x-4 mt-4">

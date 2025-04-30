@@ -114,9 +114,14 @@ export default function HistoryPage() {
             >
               <span className="relative inline-flex items-center">
                 <motion.div
-                  className="w-24 h-24 md:w-32 md:h-32 relative -mr-2"
-                  whileHover={{ rotate: 360 }}
-                  transition={{ duration: 2, ease: "easeInOut" }}
+                  className="w-28 h-28 md:w-36 md:h-36 relative -mr-2"
+                  animate={{ rotate: 360 }}
+                  transition={{ 
+                    duration: 15,
+                    ease: "linear",
+                    repeat: Infinity,
+                    repeatType: "loop"
+                  }}
                 >
                   <img
                     src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/3-fJZWLjySaEDfGMct34TJUuNzNWxe9t.png"

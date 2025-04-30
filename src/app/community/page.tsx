@@ -265,10 +265,17 @@ export default function CommunityPage() {
         <div className="container mx-auto px-6 md:px-12">
           <Link
             href="/"
-            className="inline-flex items-center text-gray-700 hover:text-[var(--village-green)] transition-colors mb-8"
+            className="inline-flex items-center text-gray-700 hover:text-[var(--village-green)] transition-colors mb-8 group"
           >
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to home
+            <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
+            <span className="relative overflow-hidden">
+              <span className="inline-block transition-transform group-hover:-translate-y-full duration-300">
+                Back to home
+              </span>
+              <span className="absolute top-0 left-0 translate-y-full transition-transform group-hover:translate-y-0 duration-300">
+                Return to main page
+              </span>
+            </span>
           </Link>
 
           <motion.h1
@@ -326,7 +333,7 @@ export default function CommunityPage() {
                 </p>
                 <div>
                   <Link
-                    href="/#booking-form"
+                    href="/coworking"
                     className="inline-flex items-center px-6 py-3 bg-[var(--village-green)] text-white font-medium rounded-md hover:bg-[var(--village-green)]/90 transition-colors"
                   >
                     Join Our Community
@@ -687,7 +694,7 @@ export default function CommunityPage() {
               href="/coworking"
               className="px-8 py-4 border border-[var(--village-green)] text-[var(--village-green)] font-medium rounded-md hover:bg-[var(--village-green)]/10 transition-colors text-lg"
             >
-              Explore Membership Options
+              Ways to Join Us
             </Link>
           </div>
         </motion.div>

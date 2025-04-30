@@ -17,6 +17,7 @@ interface TeamMember {
   bio: string
   traits: string[]
   traitIcons: string[]
+  websiteUrl: string // Add website URL property
   imageStyle?: React.CSSProperties
   logoStyle?: React.CSSProperties // Add optional logoStyle property
 }
@@ -33,6 +34,7 @@ const teamMembers: TeamMember[] = [
     bio: "Lambeth & Croydon Foodbank, part of the Trussell Trust network, plays a vital role in supporting local people facing crisis. They provide emergency food parcels and compassionate, non-judgemental support to individuals and families in need across Lambeth and Croydon. Last year alone, they distributed over 27,000 food parcels—65% of which supported children. But their impact goes beyond food: through partnerships and community hubs, they offer advice, signposting, and a space for people to find hope during difficult times.",
     traits: ["Food Support", "Crisis Aid", "Community"],
     traitIcons: ["🍲", "🆘", "🤝"],
+    websiteUrl: "https://lambethcroydon.foodbank.org.uk",
     imageStyle: {
       objectFit: "cover",
       objectPosition: "center",
@@ -52,6 +54,7 @@ const teamMembers: TeamMember[] = [
     bio: "Symphony Studios at Oasis St Martins primarily serves young people from the African and Caribbean communities, creating a vibrant hub for academia, arts, and advocacy in South London. Our facilities will offer free GCSE exam tuition, music and production classes, AI and content creation, a music studio, rehearsal spaces, and a study library.",
     traits: ["Arts", "Education", "Community"],
     traitIcons: ["🎵", "📚", "🤝"],
+    websiteUrl: "https://wearesymphony.co/",
     imageStyle: {
       objectFit: "cover",
       objectPosition: "center top",
@@ -72,6 +75,7 @@ const teamMembers: TeamMember[] = [
     bio: "At Palace for Life Foundation, we work in partnership with local organisations to help improve the lives of young south Londoners. We're looking forward to providing an inclusive sports and wellbeing programme at Oasis St Martins.",
     traits: ["Sports", "Wellbeing", "Inclusion"],
     traitIcons: ["⚽", "🧘", "🤗"],
+    websiteUrl: "https://www.palaceforlife.org",
     logoStyle: {
       objectFit: "contain",
       background: "white",
@@ -87,6 +91,7 @@ const teamMembers: TeamMember[] = [
     bio: "YCUK is the UK's first impact-lead creative agency, reimagining how creativity works with underrepresented young people. We provide peer-to-peer learning, equipment lending, paid work, and creative workshops, supporting young people's journeys into media industries – photography, film, and graphic design.",
     traits: ["Creative", "Media", "Opportunity"],
     traitIcons: ["🎨", "📷", "✨"],
+    websiteUrl: "https://ycuk.org",
     imageStyle: {
       objectFit: "cover",
       objectPosition: "center",
@@ -106,6 +111,7 @@ const teamMembers: TeamMember[] = [
     bio: "Spiral believes in youth and provides support services to help young people reach their full potential. Through mentoring, workshops, and community engagement, we create opportunities for personal growth and development.",
     traits: ["Support", "Youth", "Development"],
     traitIcons: ["🤲", "👦", "🌱"],
+    websiteUrl: "https://www.spiralskills.co.uk/",
     imageStyle: {
       objectFit: "cover",
       objectPosition: "center",
@@ -124,7 +130,8 @@ const teamMembers: TeamMember[] = [
     logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/cropped-I-AM-IN-ME-logo-crop.png-2-tuJez9Xd1blowczumuhFxWKfLl9x9K.png",
     bio: "I AM IN ME is a dynamic community organisation dedicated to supporting young people up to the age of 25 who are at risk of or experiencing exclusion. Through a mix of engaging group workshops and tailored one-to-one support, they help individuals develop essential life skills, confidence, and pathways to employment. Their work bridges the gap between vulnerable youth and mainstream systems, offering a compassionate and empowering space to grow, connect, and thrive.",
     traits: ["Support", "Skills", "Empowerment"],
-    traitIcons: ["🤲", "🔧", "💪"],
+    traitIcons: ["🔧", "💪"],
+    websiteUrl: "https://www.iaminme.co.uk",
     imageStyle: {
       objectFit: "cover",
       objectPosition: "center",
@@ -144,6 +151,7 @@ const teamMembers: TeamMember[] = [
     bio: "Rekindle sparks a love of learning in young people aged 11-14. We support their education, aspirations, and wellbeing through a creative and cultural curriculum. Our weekday sanctuary (open 4-7pm) offers mentoring, homework help, meals, access to professional networks, holiday clubs, and more—all free of charge.",
     traits: ["Education", "Mentoring", "Wellbeing"],
     traitIcons: ["📚", "🤝", "💫"],
+    websiteUrl: "https://rekindleschool.org",
     imageStyle: {
       objectFit: "cover",
       objectPosition: "center",
@@ -234,7 +242,7 @@ function ModalPortal({
               {/* Visit Website Button */}
               <div className="flex justify-center items-center pt-3 md:pt-4 border-t border-gray-200">
                 <a
-                  href={`https://${selectedMember.name.toLowerCase().replace(/\s+/g, "-")}.org`}
+                  href={selectedMember.websiteUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group relative px-6 md:px-8 py-2.5 md:py-3.5 overflow-hidden rounded-full bg-gradient-to-r from-[var(--village-green)] to-[var(--village-teal)] text-white font-medium shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 text-sm md:text-base"

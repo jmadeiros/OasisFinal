@@ -56,7 +56,7 @@ export default function Home() {
   const [selectedSpaceData, setSelectedSpaceData] = useState<SpaceData | null>(null)
   const [showBookingForm, setShowBookingForm] = useState(true)
   const [activeSpaceTab, setActiveSpaceTab] = useState<string | null>("offices")
-  const [activeSpaceSubTab, setActiveSpaceSubTab] = useState<string | null>("creative-labs")
+  const [activeSpaceSubTab, setActiveSpaceSubTab] = useState<string | undefined>("creative-labs")
 
   const framesRef = useRef<HTMLDivElement>(null)
   const spacesSectionRef = useRef<HTMLDivElement>(null)
@@ -200,7 +200,7 @@ export default function Home() {
         setSelectedSpaceData({
           title: spaceName,
           description: spaceData.description,
-          image: spaceData.image || (spaceData.images && spaceData.images.length > 0 ? spaceData.images[0] : undefined),
+          image: (spaceData as any).image ?? ((spaceData as any).images && (spaceData as any).images.length > 0 ? (spaceData as any).images[0] : undefined),
           features: spaceData.features,
         })
         setShowBookingForm(true)
@@ -301,7 +301,7 @@ export default function Home() {
       {/* Main Content Sections */}
       <div ref={spacesSectionRef} className="bg-transparent relative z-[1]">
         <DebugLogger componentName="BeforeSpacesSection" />
-        <SpacesSection activeTab={activeSpaceTab} activeSubTab={activeSpaceSubTab} onEnquire={handleEnquire} />
+        <SpacesSection activeTab={activeSpaceTab} activeSubTab={activeSpaceSubTab === null ? undefined : activeSpaceSubTab} onEnquire={handleEnquire} />
         <DebugLogger componentName="AfterSpacesSection" />
       </div>
 
