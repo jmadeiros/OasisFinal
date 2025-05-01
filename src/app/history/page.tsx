@@ -6,6 +6,17 @@ import Link from "next/link"
 import { inter } from "../fonts"
 import { useState } from "react"
 
+// Add CSS for hiding scrollbars
+const hideScrollbarStyle = `
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+`
+
 export default function HistoryPage() {
   const [hoveredIcon, setHoveredIcon] = useState<string | null>(null)
 
@@ -87,6 +98,9 @@ export default function HistoryPage() {
 
   return (
     <main className="min-h-screen bg-[#f8f5f0]">
+      {/* Add the style tag */}
+      <style jsx global>{hideScrollbarStyle}</style>
+      
       {/* Header with colored background */}
       <div className="w-full pt-16 pb-6 md:pt-20 md:pb-8 bg-[#f0e9df]">
         <div className="container mx-auto px-6 md:px-12">
@@ -136,14 +150,14 @@ export default function HistoryPage() {
         </div>
       </div>
 
-      {/* Interactive journey highlights */}
-      <div className="container mx-auto px-6 md:px-12 pt-8 pb-4">
+      {/* Interactive journey highlights - Desktop version */}
+      <div className="container mx-auto px-6 md:px-12 pt-8 pb-4 hidden md:block">
         <div className="max-w-4xl mx-auto">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-6 mb-8">
+          <div className="flex flex-row justify-between items-center gap-6 mb-8">
             {journeyHighlights.map((highlight, index) => (
               <motion.div
                 key={index}
-                className="relative group bg-white/50 backdrop-blur-sm rounded-lg p-4 flex flex-col items-center text-center w-full md:w-1/3 cursor-pointer shadow-sm"
+                className="relative group bg-white/50 backdrop-blur-sm rounded-lg p-4 flex flex-col items-center text-center w-1/3 cursor-pointer shadow-sm"
                 whileHover={{ y: -5, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)" }}
               >
                 <div
@@ -159,6 +173,53 @@ export default function HistoryPage() {
               </motion.div>
             ))}
           </div>
+        </div>
+      </div>
+
+      {/* Interactive journey highlights - Mobile version with horizontal scroll */}
+      <div className="md:hidden container mx-auto px-0 pt-8 pb-6 overflow-x-auto hide-scrollbar">
+        <div className="pl-6 flex space-x-4 w-max pb-4">
+          {journeyHighlights.map((highlight, index) => (
+            <motion.div
+              key={index}
+              className="relative group bg-white/50 backdrop-blur-sm rounded-lg p-4 flex flex-col items-center text-center w-[220px] flex-shrink-0 shadow-sm"
+              whileTap={{ scale: 0.98 }}
+            >
+              <div
+                className="mb-2"
+                style={{ color: highlight.color }}
+              >
+                {highlight.icon}
+              </div>
+              <h3 className="text-base font-semibold mb-1" style={{ color: highlight.color }}>
+                {highlight.title}
+              </h3>
+              <div className="text-sm text-gray-500 mb-2">{highlight.year}</div>
+              <p className="text-xs text-gray-600">{highlight.description}</p>
+            </motion.div>
+          ))}
+        </div>
+        {/* Swipe indicator */}
+        <div className="flex justify-center items-center mt-2 text-gray-500 text-sm">
+          <svg
+            className="w-4 h-4 mr-1"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
+          <span>Swipe to explore</span>
+          <svg
+            className="w-4 h-4 ml-1"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
         </div>
       </div>
 
@@ -194,8 +255,8 @@ export default function HistoryPage() {
       {/* Main content */}
       <div className="container mx-auto px-6 md:px-12 py-16">
         <div className="max-w-4xl mx-auto">
-          {/* Timeline */}
-          <div className="relative mb-16 p-8 md:p-12">
+          {/* Timeline - Desktop version (hidden on mobile) */}
+          <div className="relative mb-16 p-8 md:p-12 hidden md:block">
             {timelineSections.map((section, sectionIndex) => (
               <div key={sectionIndex} className="mb-20">
                 {/* Section title */}
@@ -294,6 +355,71 @@ export default function HistoryPage() {
                       </motion.div>
                     )
                   })}
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          {/* Mobile Timeline - vertical card layout (shown only on mobile) */}
+          <div className="md:hidden mb-16">
+            {timelineSections.map((section, sectionIndex) => (
+              <div key={sectionIndex} className="mb-12">
+                {/* Section title */}
+                <div className="text-center mb-8 relative">
+                  <h2 className="text-2xl font-bold text-gray-800 inline-block px-8 bg-[#f8f5f0] relative z-10">
+                    {section.title}
+                  </h2>
+                  
+                  {/* Horizontal line below section title */}
+                  <div className="w-full h-px bg-gray-300 mt-4"></div>
+                </div>
+                
+                {/* Mobile timeline events */}
+                <div className="space-y-10 relative">
+                  {/* Vertical line for mobile */}
+                  <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-gray-300"></div>
+                  
+                  {section.events.map((event, eventIndex) => (
+                    <motion.div
+                      key={eventIndex}
+                      className="relative pl-12"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: 0.2 + eventIndex * 0.1 }}
+                    >
+                      {/* Timeline dot */}
+                      <div
+                        className="absolute left-2 top-1 transform -translate-x-1/2 w-5 h-5 rounded-full border-3 border-white z-10"
+                        style={{ backgroundColor: event.color }}
+                      ></div>
+                      
+                      {/* Year indicator */}
+                      <div
+                        className="inline-block px-3 py-1 rounded-full text-white text-base font-medium mb-2"
+                        style={{ backgroundColor: event.color }}
+                      >
+                        {event.year}
+                      </div>
+                      
+                      {/* Card content */}
+                      <div className="bg-white rounded-lg shadow-sm p-4 border border-gray-100">
+                        <h3 className="text-lg font-medium text-gray-800 mb-2">{event.title}</h3>
+                        <p className="text-gray-700 text-sm mb-4">{event.description}</p>
+                        
+                        {/* Image */}
+                        <div className="overflow-hidden rounded-lg h-36 mb-2">
+                          <img
+                            src={event.image || "/placeholder.svg"}
+                            alt={event.title}
+                            className="w-full h-full object-cover object-center"
+                          />
+                        </div>
+                        
+                        {/* Image caption always visible on mobile */}
+                        <div className="text-xs text-gray-600 italic">{event.imageCaption}</div>
+                      </div>
+                    </motion.div>
+                  ))}
                 </div>
               </div>
             ))}

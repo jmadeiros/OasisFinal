@@ -1,11 +1,22 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Check, ArrowLeft, Briefcase, CalendarDays, HandHeart, Users } from "lucide-react"
+import { Check, ArrowLeft, Briefcase, CalendarDays, HandHeart, Users, ChevronRight, ChevronLeft } from "lucide-react"
 import Link from "next/link"
 import { inter } from "../fonts"
 import { useState } from "react"
 import Image from "next/image"
+
+// Add CSS for hiding scrollbars
+const hideScrollbarStyle = `
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+`
 
 export default function CoworkingPage() {
   const [expandedCards, setExpandedCards] = useState<number[]>([])
@@ -231,7 +242,7 @@ export default function CoworkingPage() {
               src="/images/community-connection.jpeg" 
               alt="Community event at The Village"
               fill 
-              className="object-cover"
+              className="object-cover object-[center_25%]"
             />
           </div>
         </motion.section>
@@ -248,7 +259,12 @@ export default function CoworkingPage() {
               Find the perfect coworking membership to suit your work style and budget.
             </p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+          
+          {/* Add the style tag */}
+          <style jsx global>{hideScrollbarStyle}</style>
+          
+          {/* Desktop Grid View (hidden on mobile) */}
+          <div className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
             {membershipPlans.map((plan) => (
               <div
                 key={plan.id}
@@ -296,6 +312,69 @@ export default function CoworkingPage() {
                 </div>
               </div>
             ))}
+          </div>
+          
+          {/* Mobile Horizontal Scroll View (shown only on mobile) */}
+          <div className="sm:hidden overflow-x-auto hide-scrollbar pb-6">
+            <div className="flex space-x-4 px-4 w-max">
+              {membershipPlans.map((plan) => (
+                <div
+                  key={plan.id}
+                  className={`relative rounded-xl overflow-hidden flex-shrink-0 w-[280px] ${plan.popular ? "shadow-lg" : "shadow-md"}`}
+                >
+                  {plan.popular && (
+                    <div className="absolute top-0 right-0 bg-[var(--village-teal)] text-white text-xs font-bold px-3 py-1 rounded-bl-lg z-10">
+                      MOST POPULAR
+                    </div>
+                  )}
+                  <div
+                    className="bg-white border-t-4 p-6 h-full flex flex-col"
+                    style={{ borderColor: plan.color === "var(--village-cream)" ? "var(--village-gold)" : plan.color }}
+                  >
+                    <h3 className="text-xl font-bold mb-2" style={{ color: plan.color }}>
+                      {plan.name}
+                    </h3>
+                    <div className="mb-4">
+                      <span className="text-2xl font-bold text-gray-800">{plan.price}</span>
+                      <span className="text-gray-600 ml-1">{plan.period}</span>
+                    </div>
+                    <p className="text-gray-700 mb-4 text-sm">{plan.description}</p>
+                    <ul className="space-y-2 mb-6 flex-grow text-sm">
+                      {plan.features.slice(0, 3).map((feature, i) => (
+                        <li key={i} className="flex items-start gap-2 text-gray-600">
+                          <Check
+                            className="w-4 h-4 mt-0.5 flex-shrink-0"
+                            style={{ color: plan.color === "var(--village-cream)" ? "var(--village-gold)" : plan.color }}
+                          />
+                          <span>{feature}</span>
+                        </li>
+                      ))}
+                      {plan.features.length > 3 && (
+                        <li className="text-xs text-gray-500 italic">+ {plan.features.length - 3} more benefits</li>
+                      )}
+                    </ul>
+                    <button
+                      className="w-full py-2.5 rounded-lg font-medium text-sm transition-colors mt-auto"
+                      style={{
+                        backgroundColor: `${plan.color === "var(--village-cream)" ? "var(--village-gold)" : plan.color}20`,
+                        color: plan.color === "var(--village-cream)" ? "var(--village-gold)" : plan.color,
+                        border: `1px solid ${plan.color === "var(--village-cream)" ? "var(--village-gold)" : plan.color}40`,
+                      }}
+                      onClick={scrollToBooking}
+                    >
+                      Enquire
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+            
+            {/* Swipe indicator for mobile */}
+            <div className="flex justify-center items-center mt-3 text-gray-500 text-sm">
+              <ChevronLeft className="w-4 h-4 mr-1" />
+              <span>Swipe to see more options</span>
+              <ChevronRight className="w-4 h-4 ml-1" />
+            </div>
           </div>
         </motion.section>
 

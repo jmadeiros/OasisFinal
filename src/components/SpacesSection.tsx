@@ -294,6 +294,16 @@ export default function SpacesSection({ activeTab = null, activeSubTab = null, o
             background: #c0c0c0;
             border-radius: 10px;
           }
+          
+          /* Shorter scrollbar for coworking tabs only */
+          .coworking-tabs.scrollbar-track::-webkit-scrollbar {
+            width: 40%; /* Make the scrollbar shorter */
+          }
+          
+          .coworking-tabs.scrollbar-track::-webkit-scrollbar-thumb {
+            min-width: 50px; /* Minimum width for the thumb */
+            max-width: 80px; /* Maximum width for the thumb */
+          }
         }
 
         /* Responsive scrollbar styles */
@@ -361,7 +371,7 @@ export default function SpacesSection({ activeTab = null, activeSubTab = null, o
                 <div className="relative">
                   <div
                     ref={coworkingTabsRef}
-                    className="w-full flex flex-nowrap md:flex-wrap justify-start md:justify-center gap-4 overflow-x-auto pb-4 px-2 -mx-2 scrollbar-track scroll-container"
+                    className="w-full flex flex-nowrap md:flex-wrap justify-start md:justify-center gap-4 overflow-x-auto pb-4 px-2 -mx-2 scrollbar-track scroll-container coworking-tabs"
                   >
                     {Object.keys(coworkingOptions).map((key) => (
                       <button

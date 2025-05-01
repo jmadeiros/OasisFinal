@@ -266,12 +266,23 @@ export default function AboutUsPage() {
           </motion.h1>
 
           <motion.p
-            className="text-lg md:text-xl text-gray-700 max-w-xl mt-6 mr-auto"
+            className="hidden md:flex text-lg md:text-xl text-gray-700 max-w-xl mt-6 mr-auto flex-col"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            The Oasis vision is for community – a place where everyone is included, making a contribution, and reaching their God-given potential.
+            <span>The Village is a vibrant community workspace</span>
+            <span>where people connect, create, and collaborate</span>
+            <span>in the heart of Tulse Hill.</span>
+          </motion.p>
+
+          <motion.p
+            className="md:hidden text-lg text-gray-700 max-w-xl mt-6 mr-auto"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            The Village is a vibrant community workspace where people connect, create, and collaborate in the heart of Tulse Hill.
           </motion.p>
         </div>
       </div>
@@ -525,7 +536,7 @@ export default function AboutUsPage() {
           </motion.div>
 
           {/* Desktop Layout - Hidden on Mobile */}
-          <div className="hidden md:flex md:flex-row md:gap-8 md:items-start">
+          <div className="hidden md:block">
             {/* Left Column - Explanatory Text */}
             <motion.div
               className="bg-white rounded-xl shadow-md p-8 w-1/2"
@@ -605,7 +616,7 @@ export default function AboutUsPage() {
         </div>
       </div>
 
-      {/* Our Impact Section - Replacing Team Section */}
+      {/* Our Impact Section - Showing metrics and testimonials */}
       <div className="py-16 bg-white">
         <div className="container mx-auto px-6 md:px-12">
           <motion.div
@@ -624,7 +635,7 @@ export default function AboutUsPage() {
 
             <div className="max-w-3xl mx-auto bg-[#f8f5f0] p-8 rounded-2xl shadow-md border border-gray-100 mb-10">
               <p className="text-xl text-gray-700 leading-relaxed">
-                <span className="font-semibold">For 40 years</span> Oasis has been helping to build community where
+                <span className="font-semibold">For 35 years</span> Oasis has been helping to build community where
                 everyone can thrive. We work to end disadvantage and create opportunity for all, providing education,
                 housing, health, justice, youth and family support.
               </p>
@@ -641,7 +652,7 @@ export default function AboutUsPage() {
             </motion.h3>
           </motion.div>
 
-          {/* Impact Metrics */}
+          {/* Impact Metrics - Desktop and Mobile */}
           <div className="md:overflow-visible mb-12">
             <div
               ref={metricsScrollRef}
@@ -663,70 +674,66 @@ export default function AboutUsPage() {
                     transition={{ duration: 0.4, delay: 0.1 * index }}
                     whileHover={{ y: -10, transition: { duration: 0.2 } }}
                   >
-                    <div className="p-6" style={{ backgroundColor: `${metric.color}1A` }}>
-                      <div
-                        className="w-12 h-12 rounded-full flex items-center justify-center mb-4"
-                        style={{ backgroundColor: metric.color }}
-                      >
+                    <div className="p-6">
+                      <div className="flex items-center mb-4">
+                        <div className="p-2 rounded-full mr-3" style={{ backgroundColor: metric.color }}>
                           {metric.icon}
+                        </div>
+                        <h3 className="text-xl font-medium text-gray-800">{metric.label}</h3>
                       </div>
-                      <div className="text-3xl font-bold" style={{ color: metric.color }}>
+                      <div className="text-5xl font-bold mb-3" style={{ color: metric.color }}>
                         {metric.figure}
                       </div>
-                      <h3 className="text-lg font-semibold text-gray-800 mt-1 mb-2">{metric.label}</h3>
-                      <p className="text-sm text-gray-600">{metric.description}</p>
+                      <p className="text-gray-600">{metric.description}</p>
                     </div>
                   </motion.div>
                 ))}
               </div>
+            </div>
+
+            {/* Swipe indicator for mobile */}
+            <div className="flex justify-center mt-4 md:hidden">
+              <p className="text-sm text-gray-500 italic">Swipe to explore</p>
             </div>
           </div>
 
-          {/* Testimonials Section */}
-          <motion.div
-            className="text-center mb-12 mt-16"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-          >
-            <h2 className={`text-3xl font-bold mb-4 text-gray-800 ${inter.className}`}>What Our Community Says</h2>
-          </motion.div>
-
-          <div className="relative">
+          {/* Testimonials - Desktop and Mobile */}
+          <div className="md:overflow-visible">
             <div
               ref={testimonialsScrollRef}
-              onScroll={handleTestimonialsScroll}
-              className="overflow-x-auto hide-scrollbar py-8 px-4 snap-x snap-mandatory scroll-smooth"
-              style={{ scrollbarWidth: "none" }}
+              className="overflow-x-auto hide-scrollbar md:overflow-visible -mx-6 px-6 md:mx-0 md:px-0"
+              style={{ 
+                scrollbarWidth: "none", 
+                WebkitOverflowScrolling: "touch",
+                scrollSnapType: "x mandatory" 
+              }}
             >
-              <div className="flex space-x-8 w-max pb-4">
+              <div className="flex md:grid md:grid-cols-2 gap-8 w-[800px] md:w-auto">
                 {testimonials.map((testimonial, index) => (
                   <motion.div
                     key={index}
-                    className={`flex-shrink-0 w-[80vw] md:w-[50vw] lg:w-[40vw] snap-center bg-[#f0e9df] p-8 rounded-xl shadow-md transition-opacity duration-300 ${
-                      index === currentTestimonialIndex ? "opacity-100" : "opacity-60"
-                    }`}
-                    initial={{ opacity: 0, x: 50 }}
-                    animate={{ opacity: index === currentTestimonialIndex ? 1 : 0.6, x: 0 }}
-                    transition={{ duration: 0.5, delay: 0.1 * index }}
+                    className="bg-white rounded-2xl p-8 shadow-md border border-gray-100 flex-shrink-0 w-[350px] md:w-auto"
+                    style={{ scrollSnapAlign: "center" }}
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.5, delay: 0.2 * index }}
                   >
-                    <p className="text-lg italic text-gray-700 mb-4">&quot;{testimonial.quote}&quot;</p>
-                    <div className="flex items-center mt-4">
-                      <Image
-                        src={testimonial.image}
-                        alt={testimonial.author}
-                        width={40}
-                        height={40}
-                        className="rounded-full mr-3"
-                      />
-                      <p className="font-semibold text-gray-800">— {testimonial.author}</p>
+                    <div className="flex items-start mb-6">
+                      <div className="bg-[var(--village-orange)] p-2 rounded-full mr-4 mt-1">
+                        <MessageSquareQuote className="h-5 w-5 text-white" />
+                      </div>
+                      <p className="text-lg text-gray-700 italic leading-relaxed">"{testimonial.quote}"</p>
+                    </div>
+                    <div className="ml-12">
+                      <p className="font-medium text-gray-800">{testimonial.author}</p>
                     </div>
                   </motion.div>
                 ))}
               </div>
             </div>
-            {/* Navigation Dots */}
-            <div className="flex justify-center mt-4 space-x-2">
+
+            {/* Pagination dots - only visible on mobile */}
+            <div className="flex justify-center mt-4 space-x-2 md:hidden">
               {testimonials.map((_, index) => (
                 <button
                   key={index}
@@ -734,8 +741,13 @@ export default function AboutUsPage() {
                     currentTestimonialIndex === index ? "bg-[var(--village-orange)] w-5" : "bg-gray-300"
                   }`}
                   onClick={() => scrollToTestimonial(index)}
+                  aria-label={`View testimonial ${index + 1}`}
                 />
               ))}
+            </div>
+
+            <div className="flex justify-center mt-2 md:hidden">
+              <p className="text-sm text-gray-500 italic">Swipe to explore</p>
             </div>
           </div>
         </div>

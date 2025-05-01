@@ -56,11 +56,11 @@ const Card = ({ title, description, expandedDescription, image, linkText, linkHr
             {isHovered ? expandedDescription : description}
           </div>
 
-          {/* Link at the bottom, always visible on hover */}
+          {/* Link at the bottom, always visible on hover and on mobile */}
           <div
-            className="mt-4 transition-opacity duration-300 ease-in-out h-6"
+            className="mt-4 transition-opacity duration-300 ease-in-out h-6 md:opacity-0 md:hover:opacity-100"
             style={{
-              opacity: isHovered ? 1 : 0,
+              opacity: isHovered ? 1 : undefined,
             }}
           >
             <Link

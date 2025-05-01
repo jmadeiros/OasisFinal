@@ -327,7 +327,7 @@ export default function BuiltForCommunity() {
         duration: 0.3,
         ease: "easeOut",
         repeat: Number.POSITIVE_INFINITY,
-        repeatType: "reverse",
+        repeatType: "reverse" as const,
       },
     },
   }
@@ -448,7 +448,7 @@ export default function BuiltForCommunity() {
                   <div className="absolute top-[-140px] sm:top-[-80px] left-[-30px] sm:left-[-60px] z-50 scale-75 sm:scale-100">
 
                   // To this (moving it a bit lower on mobile only): */}
-                  <div className="absolute top-[-110px] sm:top-[-80px] left-[-30px] sm:left-[-60px] z-50 scale-75 sm:scale-100">
+                  <div className="absolute top-[-50px] sm:top-[-80px] left-[-30px] sm:left-[-60px] z-50 scale-75 sm:scale-100">
                     {/* "Click to Flip" text */}
                     <motion.div
                       className="transform rotate-[-5deg]"
@@ -691,7 +691,7 @@ export default function BuiltForCommunity() {
                   custom={0}
                 >
                   {/* Modify the title heading */}
-                  <h2 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-bold leading-tight tracking-tight">
+                  <h2 className="text-5xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-bold leading-tight tracking-tight">
                     <span
                       className="block text-transparent bg-clip-text pb-2"
                       style={{
@@ -815,7 +815,7 @@ export default function BuiltForCommunity() {
               transition={{ duration: 0.8 }}
             >
               <div className="text-[var(--village-orange)] font-light mb-4 max-w-3xl">Our Community Space</div>
-              <h2 className="text-5xl md:text-6xl font-bold leading-tight tracking-tight mb-6">
+              <h2 className="text-4xl md:text-6xl font-bold leading-tight tracking-tight mb-6">
                 <span
                   className="block text-transparent bg-clip-text pb-2"
                   style={{
@@ -970,19 +970,14 @@ export default function BuiltForCommunity() {
 
                       <div>
                         <p className="text-base text-gray-700 leading-relaxed font-light mb-3">
-                          We're not a conventional school, <span className="text-[var(--village-gold)] font-medium">we're a Village</span>. A place where education meets community. We believe
-                          it takes more than a classroom to raise a child, it takes connection, trust, and shared
-                          responsibility. Our work is grounded in radical inclusion. We believe every person holds unique worth
-                          regardless of background, behaviour, or circumstances. Everyone matters. Everyone belongs.
+                          We're not a conventional school, we're a village. A place where education meets community. We
+                          believe it takes more than a classroom to raise a child, it takes connection, trust, and
+                          shared responsibility.
                         </p>
 
                         <p className="text-base text-gray-700 leading-relaxed font-light">
-                          That's why we work alongside families, local services, and partners to build a nurturing ecosystem
-                          around each child. That belief drives us to challenge exclusion and inequality wherever it exists. And
-                          because we know that thriving children come from thriving communities, we're also creating shared
-                          spaces including co-working that strengthen connection, collaboration, and opportunity for the
-                          families and people around them. Our approach combines education, community development, and social
-                          support in one integrated model.
+                          Our work is grounded in radical inclusion. We believe every person holds unique worth
+                          regardless of background, behaviour, or circumstances. Everyone matters. Everyone belongs.
                         </p>
                       </div>
                     </div>

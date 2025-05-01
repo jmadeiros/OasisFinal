@@ -231,7 +231,7 @@ export default function IntroSection({ onScrollToFrames }: IntroSectionProps) {
                 <img 
                   src="/images/oasis-st-martins-village-logo.png" 
                   alt="Oasis St Martins Village Logo" 
-                  className="h-52 w-auto brightness-125"
+                  className="h-36 md:h-52 w-auto brightness-125"
                 />
               </div>
             </Link>
@@ -344,12 +344,12 @@ export default function IntroSection({ onScrollToFrames }: IntroSectionProps) {
             style={{
               fontFamily: "sans-serif",
               fontWeight: 600,
-              fontSize: "clamp(2rem, 6vw, 4.5rem)",
+              fontSize: "clamp(2.5rem, 8vw, 4.5rem)",
               lineHeight: 1.1,
             }}
           >
             <div className="mb-2">A place for</div>
-            <div className="relative" style={{ minWidth: "200px", minHeight: "70px" }}>
+            <div className="relative" style={{ minWidth: "200px", minHeight: "80px" }}>
               <AnimatePresence mode="wait">
                 <motion.span
                   key={animationKey}

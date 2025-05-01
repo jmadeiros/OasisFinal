@@ -3,9 +3,17 @@
 import { useState } from "react"
 import { motion } from "framer-motion"
 import { Phone, MapPin } from "lucide-react"
+import { saveContactMessage, FirestoreResult } from "../firebase/firestore"
+
+// Define form data interface
+interface ContactFormData {
+  name: string;
+  email: string;
+  message: string;
+}
 
 export default function ContactSection() {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<ContactFormData>({
     name: "",
     email: "",
     message: "",
@@ -13,22 +21,45 @@ export default function ContactSection() {
 
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [error, setError] = useState("")
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
+    setError("")
 
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500))
-
-    console.log("Form submitted:", formData)
-    setIsSubmitting(false)
-    setIsSubmitted(true)
+    try {
+      // Save to Firestore
+      const result = await saveContactMessage({
+        ...formData,
+        submittedAt: new Date().toISOString(),
+      })
+      
+      console.log("Contact form submitted to Firestore:", result)
+      
+      if (result.success) {
+        setIsSubmitting(false)
+        setIsSubmitted(true)
+        
+        // Reset form
+        setFormData({
+          name: "",
+          email: "", 
+          message: ""
+        })
+      } else {
+        throw new Error("Failed to save message")
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error)
+      setIsSubmitting(false)
+      setError("Failed to send message. Please try again later.")
+    }
   }
 
   return (
@@ -90,6 +121,12 @@ export default function ContactSection() {
                     className="w-full px-4 py-3 bg-[#e0d9cf] border border-[#d8d0c6] text-gray-800 focus:outline-none focus:border-[var(--village-green)] resize-none rounded-md"
                   />
                 </div>
+
+                {error && (
+                  <div className="p-3 bg-red-100 border border-red-300 text-red-700 rounded-md">
+                    {error}
+                  </div>
+                )}
 
                 <button
                   type="submit"

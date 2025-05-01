@@ -1,8 +1,11 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import { CheckIcon, Calendar } from "lucide-react"
 import Image from "next/image"
+import { format } from "date-fns"
+// Import saveEnquiry function
+import { saveEnquiry, FirestoreResult } from "../firebase/firestore"
 
 // Define the space data interface
 interface SpaceData {
@@ -103,29 +106,59 @@ export default function BookingForm({
     }
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    // Start processing
-    setIsProcessing(true)
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsProcessing(true);
+
+    // --- Sanitize Date Values --- 
+    let dateValue: string | { start: string | null; end: string | null } | null = null;
+
+    if (shouldShowDateFields()) { // Only process dates if fields are visible
+      if (multipleDays) {
+        // For multiple days, send object with dates, ensuring they are valid or null
+        const start = formData.startDate && formData.startDate !== today ? formData.startDate : null; // Use null if default/empty
+        const end = formData.endDate && formData.endDate !== today ? formData.endDate : null; // Use null if default/empty
+        // Only include date object if at least one date is set
+        if (start || end) {
+            dateValue = { start: start || null, end: end || null };
+        }
+      } else {
+        // For single day, send date string only if it's not empty
+        dateValue = formData.singleDate ? formData.singleDate : null;
+      }
+    }
+    // --- End Sanitize Date Values ---
 
     const submissionData = {
-      ...formData,
-      // Include only relevant date fields based on selection
-      date: multipleDays ? { start: formData.startDate, end: formData.endDate } : formData.singleDate,
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone || null, // Send null if phone is empty
+      usageType: formData.usageType,
+      spaceName: currentSpace,
+      notes: formData.additionalInfo || null, // Send null if notes are empty
+      date: dateValue, // Use the sanitized date value
+      submittedAt: new Date().toISOString(),
+    };
+
+    console.log("Submitting sanitized data:", submissionData);
+
+    try {
+      const result = await saveEnquiry(submissionData);
+      console.log("Form submitted to Firestore:", result);
+
+      if (result.success) {
+        setIsProcessing(false);
+        setIsSubmitted(true);
+        setTimeout(() => setIsSubmitted(false), 5000);
+      } else {
+        throw result.error || new Error("Failed to save enquiry - unknown error");
+      }
+    } catch (error) {
+      console.error("Error in handleSubmit catch block:", error);
+      setIsProcessing(false);
+      // Consider adding user-facing error feedback here
     }
-    console.log("Form submitted:", submissionData)
-
-    // Simulate processing time (1.5 seconds)
-    setTimeout(() => {
-      setIsProcessing(false)
-      setIsSubmitted(true)
-
-      // Hide confirmation after 5 seconds
-      setTimeout(() => {
-        setIsSubmitted(false)
-      }, 5000)
-    }, 1500)
-  }
+  };
 
   // Check if the space type should show date fields
   const shouldShowDateFields = () => {

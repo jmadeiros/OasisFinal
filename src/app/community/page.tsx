@@ -259,27 +259,20 @@ export default function CommunityPage() {
   }, [testimonials.length])
 
   return (
-    <main className="min-h-screen bg-[#f8f5f0]">
-      {/* Header */}
-      <div className="w-full py-12 md:py-16 bg-[#f0e9df]">
-        <div className="container mx-auto px-6 md:px-12">
+    <main className="min-h-screen bg-[#f8f5f0] overflow-x-hidden">
+      {/* Header - reduced vertical padding on mobile */}
+      <div className="w-full py-8 md:py-16 bg-[#f0e9df]">
+        <div className="container mx-auto px-4 md:px-12">
           <Link
             href="/"
-            className="inline-flex items-center text-gray-700 hover:text-[var(--village-green)] transition-colors mb-8 group"
+            className="inline-flex items-center text-gray-700 hover:text-[var(--village-green)] transition-colors mb-4 md:mb-8"
           >
-            <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
-            <span className="relative overflow-hidden">
-              <span className="inline-block transition-transform group-hover:-translate-y-full duration-300">
-                Back to home
-              </span>
-              <span className="absolute top-0 left-0 translate-y-full transition-transform group-hover:translate-y-0 duration-300">
-                Return to main page
-              </span>
-            </span>
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Back to home
           </Link>
 
           <motion.h1
-            className={`text-5xl md:text-6xl font-bold leading-tight ${inter.className}`}
+            className={`text-4xl md:text-6xl font-bold leading-tight ${inter.className}`}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -296,7 +289,7 @@ export default function CommunityPage() {
           </motion.h1>
 
           <motion.p
-            className="text-xl text-gray-700 mt-4 max-w-3xl"
+            className="text-lg md:text-xl text-gray-700 mt-3 md:mt-4 max-w-3xl"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
@@ -307,40 +300,40 @@ export default function CommunityPage() {
         </div>
       </div>
 
-      {/* Main content */}
-      <div className="container mx-auto px-6 md:px-12 py-16">
-        {/* Community Hero Section */}
+      {/* Main content - reduced top padding on mobile */}
+      <div className="container mx-auto px-4 md:px-12 py-8 md:py-16">
+        {/* Community Hero Section - more compact on mobile */}
         <motion.div
-          className="mb-20"
+          className="mb-12 md:mb-20"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
           <div className="bg-white rounded-xl overflow-hidden shadow-lg">
             <div className="md:flex">
-              <div className="md:w-1/2 p-8 md:p-12 flex flex-col justify-center">
-                <h2 className={`text-3xl md:text-4xl font-bold mb-6 text-gray-800 ${inter.className}`}>
+              <div className="md:w-1/2 p-6 md:p-12 flex flex-col justify-center">
+                <h2 className={`text-2xl md:text-4xl font-bold mb-4 md:mb-6 text-gray-800 ${inter.className}`}>
                   A Community Built for Connection
                 </h2>
-                <p className="text-lg text-gray-700 mb-6">
+                <p className="text-base md:text-lg text-gray-700 mb-4 md:mb-6">
                   At The Village, we believe that meaningful connections are the foundation of success. Our community
                   brings together diverse professionals, entrepreneurs, and creatives who share knowledge, inspire each
                   other, and collaborate on exciting projects.
                 </p>
-                <p className="text-lg text-gray-700 mb-8">
+                <p className="text-base md:text-lg text-gray-700 mb-6 md:mb-8">
                   Whether you're looking for a collaborative workspace, professional development opportunities, or
                   simply a supportive network, you'll find your place in our community.
                 </p>
                 <div>
                   <Link
                     href="/coworking"
-                    className="inline-flex items-center px-6 py-3 bg-[var(--village-green)] text-white font-medium rounded-md hover:bg-[var(--village-green)]/90 transition-colors"
+                    className="inline-flex items-center px-5 py-2 md:px-6 md:py-3 bg-[var(--village-green)] text-white font-medium rounded-md hover:bg-[var(--village-green)]/90 transition-colors text-sm md:text-base"
                   >
                     Join Our Community
                   </Link>
                 </div>
               </div>
-              <div className="md:w-1/2 bg-[#f0e9df] flex items-center justify-center relative">
+              <div className="hidden md:flex md:h-auto md:w-1/2 bg-[#f0e9df] items-center justify-center relative">
                 <img
                   src="/images/community-connection.jpeg"
                   alt="Community members connecting"
@@ -353,32 +346,32 @@ export default function CommunityPage() {
 
         {/* Upcoming Events Section - Styled to match the image */}
         <motion.div
-          className="mb-20"
+          className="mb-12 md:mb-20"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
         >
-          <h2 className={`text-3xl font-bold mb-8 text-gray-800 ${inter.className}`}>Upcoming Events</h2>
+          <h2 className={`text-2xl md:text-3xl font-bold mb-6 md:mb-8 text-gray-800 ${inter.className}`}>Upcoming Events</h2>
 
-          {/* Featured Event */}
-          <div className="bg-white rounded-xl overflow-hidden shadow-md border border-gray-100 mb-8">
+          {/* Featured Event - improved layout on mobile */}
+          <div className="bg-white rounded-xl overflow-hidden shadow-md border border-gray-100 mb-6 md:mb-8">
             <div className="md:flex">
-              <div className="md:w-1/3 bg-[#f9f5f2] flex items-center justify-center p-8">
-                <Calendar className="w-20 h-20 text-[var(--village-orange)]" />
+              <div className="h-24 md:h-auto md:w-1/3 bg-[#f9f5f2] flex items-center justify-center p-4 md:p-8">
+                <Calendar className="w-12 h-12 md:w-20 md:h-20 text-[var(--village-orange)]" />
               </div>
-              <div className="p-6 md:w-2/3">
+              <div className="p-5 md:p-6 md:w-2/3">
                 <div className="text-sm text-[var(--village-orange)] uppercase tracking-wide mb-1">
                   {upcomingEvents[0].category}
                 </div>
-                <h3 className="text-2xl font-bold mb-2 text-gray-800">{upcomingEvents[0].title}</h3>
-                <div className="flex items-center text-gray-600 mb-4">
+                <h3 className="text-xl md:text-2xl font-bold mb-2 text-gray-800">{upcomingEvents[0].title}</h3>
+                <div className="flex items-center text-gray-600 mb-3 md:mb-4">
                   <Clock className="w-4 h-4 mr-2" />
                   <span>{upcomingEvents[0].time}</span>
                 </div>
-                <p className="text-gray-700 mb-4">{upcomingEvents[0].description}</p>
+                <p className="text-sm md:text-base text-gray-700 mb-4">{upcomingEvents[0].description}</p>
                 <div className="flex items-center justify-between">
-                  <span className="text-gray-600 font-medium">Coming Soon</span>
-                  <button className="px-4 py-2 bg-[var(--village-orange)]/20 text-[var(--village-orange)] rounded hover:bg-[var(--village-orange)]/30 transition-colors">
+                  <span className="text-gray-600 font-medium text-sm md:text-base">Coming Soon</span>
+                  <button className="px-3 py-1 md:px-4 md:py-2 bg-[var(--village-orange)]/20 text-[var(--village-orange)] rounded hover:bg-[var(--village-orange)]/30 transition-colors text-sm md:text-base">
                     Register
                   </button>
                 </div>
@@ -390,26 +383,27 @@ export default function CommunityPage() {
           <div className="md:overflow-visible">
             <div
               ref={eventsScrollRef}
-              className="overflow-x-auto hide-scrollbar md:overflow-visible -mx-6 px-6 md:mx-0 md:px-0"
-              style={{ scrollbarWidth: "none", WebkitOverflowScrolling: "touch" }}
+              className="overflow-x-auto hide-scrollbar md:overflow-visible -mx-4 px-4 md:mx-0 md:px-0"
+              style={{ scrollbarWidth: "none", WebkitOverflowScrolling: "touch", scrollSnapType: "x mandatory" }}
             >
-              <div className="flex md:grid md:grid-cols-3 gap-6 w-[900px] md:w-auto">
+              <div className="flex md:grid md:grid-cols-3 gap-4 md:gap-6 w-[900px] md:w-auto">
                 {upcomingEvents.slice(1).map((event) => (
                   <motion.div
                     key={event.id}
-                    className="bg-white rounded-xl overflow-hidden shadow-md border border-gray-100 flex-shrink-0 w-[280px] md:w-auto"
+                    className="bg-white rounded-xl overflow-hidden shadow-md border border-gray-100 flex-shrink-0 w-[260px] md:w-auto"
+                    style={{ scrollSnapAlign: "center" }}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.4 + event.id * 0.1 }}
                   >
-                    <div className="p-6">
+                    <div className="p-5 md:p-6">
                       <div className="text-sm text-[var(--village-orange)] uppercase tracking-wide mb-1">
                         {event.category}
                       </div>
-                      <h3 className="text-xl font-bold mb-2 text-gray-800">{event.title}</h3>
-                      <p className="text-gray-700 mb-4">{event.description}</p>
+                      <h3 className="text-lg md:text-xl font-bold mb-2 text-gray-800">{event.title}</h3>
+                      <p className="text-sm md:text-base text-gray-700 mb-4">{event.description}</p>
                       <div className="flex items-center justify-between">
-                        <span className="text-gray-600 font-medium">Coming Soon</span>
+                        <span className="text-gray-600 font-medium text-sm md:text-base">Coming Soon</span>
                       </div>
                     </div>
                   </motion.div>
@@ -436,10 +430,10 @@ export default function CommunityPage() {
             </div>
           </div>
 
-          <div className="mt-8 text-center">
+          <div className="mt-6 md:mt-8 text-center">
             <Link
               href="#"
-              className="inline-flex items-center px-6 py-3 bg-[var(--village-green)] text-white font-medium rounded-md hover:bg-[var(--village-green)]/90 transition-colors"
+              className="inline-flex items-center px-5 py-2 md:px-6 md:py-3 bg-[var(--village-green)] text-white font-medium rounded-md hover:bg-[var(--village-green)]/90 transition-colors text-sm md:text-base"
             >
               View All Events
             </Link>
@@ -448,12 +442,12 @@ export default function CommunityPage() {
 
         {/* Community Values */}
         <motion.div
-          className="mb-20"
+          className="mb-12 md:mb-20"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.5 }}
         >
-          <h2 className={`text-3xl font-bold mb-12 text-center text-gray-800 ${inter.className}`}>
+          <h2 className={`text-2xl md:text-3xl font-bold mb-6 md:mb-12 text-center text-gray-800 ${inter.className}`}>
             Our Community Values
           </h2>
 
@@ -474,23 +468,23 @@ export default function CommunityPage() {
             ))}
           </div>
 
-          {/* Mobile view - carousel with buttons */}
+          {/* Mobile view - carousel with buttons - made more compact */}
           <div className="md:hidden">
-            <div className="bg-white rounded-xl p-8 shadow-md border border-gray-100">
+            <div className="bg-white rounded-xl p-5 shadow-md border border-gray-100">
               <div className="flex flex-col items-center text-center">
-                <div className="text-[var(--village-orange)] mb-6">{communityValues[activeValueIndex].icon}</div>
-                <h3 className="text-2xl font-bold mb-4 text-gray-800">{communityValues[activeValueIndex].title}</h3>
-                <p className="text-gray-700">{communityValues[activeValueIndex].description}</p>
+                <div className="text-[var(--village-orange)] mb-4">{communityValues[activeValueIndex].icon}</div>
+                <h3 className="text-xl font-bold mb-3 text-gray-800">{communityValues[activeValueIndex].title}</h3>
+                <p className="text-sm text-gray-700">{communityValues[activeValueIndex].description}</p>
               </div>
             </div>
 
-            <div className="flex justify-between items-center mt-4">
+            <div className="flex justify-between items-center mt-3">
               <button
                 onClick={() => setActiveValueIndex((prev) => (prev > 0 ? prev - 1 : communityValues.length - 1))}
-                className="w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center border border-gray-200"
+                className="w-8 h-8 rounded-full bg-white shadow-md flex items-center justify-center border border-gray-200"
                 aria-label="Previous value"
               >
-                <ArrowLeft className="w-5 h-5 text-gray-600" />
+                <ArrowLeft className="w-4 h-4 text-gray-600" />
               </button>
 
               <div className="flex space-x-2">
@@ -508,15 +502,15 @@ export default function CommunityPage() {
 
               <button
                 onClick={() => setActiveValueIndex((prev) => (prev < communityValues.length - 1 ? prev + 1 : 0))}
-                className="w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center border border-gray-200"
+                className="w-8 h-8 rounded-full bg-white shadow-md flex items-center justify-center border border-gray-200"
                 aria-label="Next value"
               >
-                <ArrowLeft className="w-5 h-5 text-gray-600 transform rotate-180" />
+                <ArrowLeft className="w-4 h-4 text-gray-600 transform rotate-180" />
               </button>
             </div>
 
             <div className="text-center mt-2">
-              <p className="text-sm text-gray-500">
+              <p className="text-xs text-gray-500">
                 <span className="font-medium">{activeValueIndex + 1}</span> of{" "}
                 <span className="font-medium">{communityValues.length}</span>
               </p>
@@ -526,38 +520,43 @@ export default function CommunityPage() {
 
         {/* Community Benefits */}
         <motion.div
-          className="mb-20"
+          className="mb-12 md:mb-20"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.7 }}
         >
-          <h2 className={`text-3xl font-bold mb-12 text-center text-gray-800 ${inter.className}`}>
+          <h2 className={`text-2xl md:text-3xl font-bold mb-6 md:mb-12 text-center text-gray-800 ${inter.className}`}>
             Community Benefits
           </h2>
 
           <div className="md:overflow-visible">
             <div
               ref={benefitsScrollRef}
-              className="overflow-x-auto hide-scrollbar md:overflow-visible -mx-6 px-6 md:mx-0 md:px-0"
-              style={{ scrollbarWidth: "none", WebkitOverflowScrolling: "touch" }}
+              className="overflow-x-auto hide-scrollbar md:overflow-visible -mx-4 px-4 md:mx-0 md:px-0"
+              style={{ 
+                scrollbarWidth: "none", 
+                WebkitOverflowScrolling: "touch",
+                scrollSnapType: "x mandatory"
+              }}
             >
-              <div className="flex md:grid md:grid-cols-4 gap-6 w-[1000px] md:w-auto">
+              <div className="flex md:grid md:grid-cols-4 gap-4 md:gap-6 w-auto md:w-auto">
                 {communityBenefits.map((benefit, index) => (
                   <motion.div
                     key={index}
-                    className="bg-white rounded-xl p-6 shadow-md border border-gray-100 h-full flex-shrink-0 w-[240px] md:w-auto"
+                    className="bg-white rounded-xl p-5 md:p-6 shadow-md border border-gray-100 h-full flex-shrink-0 w-[220px] md:w-auto"
+                    style={{ scrollSnapAlign: "center" }}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
                   >
                     <div
-                      className="w-12 h-12 rounded-full flex items-center justify-center mb-4"
+                      className="w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center mb-3 md:mb-4"
                       style={{ backgroundColor: `${benefit.color}20`, color: benefit.color }}
                     >
                       {benefit.icon}
                     </div>
-                    <h3 className="text-xl font-bold mb-3 text-gray-800">{benefit.title}</h3>
-                    <p className="text-gray-700">{benefit.description}</p>
+                    <h3 className="text-lg md:text-xl font-bold mb-2 md:mb-3 text-gray-800">{benefit.title}</h3>
+                    <p className="text-sm md:text-base text-gray-700">{benefit.description}</p>
                   </motion.div>
                 ))}
               </div>
@@ -585,12 +584,12 @@ export default function CommunityPage() {
 
         {/* Testimonials with more classic, rounded quotation marks */}
         <motion.div
-          className="mb-20"
+          className="mb-12 md:mb-20"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.9 }}
         >
-          <h2 className={`text-3xl font-bold mb-12 text-center text-gray-800 ${inter.className}`}>Community Voices</h2>
+          <h2 className={`text-2xl md:text-3xl font-bold mb-6 md:mb-12 text-center text-gray-800 ${inter.className}`}>Community Voices</h2>
 
           {/* Desktop view - unchanged grid layout */}
           <div className="hidden md:grid md:grid-cols-3 gap-8">
@@ -623,6 +622,7 @@ export default function CommunityPage() {
 
           {/* Mobile view - horizontal scrollable row, hidden on desktop */}
           <div
+            ref={testimonialsScrollRef}
             className="md:hidden w-full overflow-x-auto hide-scrollbar pb-6"
             style={{
               scrollSnapType: "x mandatory",
@@ -665,6 +665,21 @@ export default function CommunityPage() {
               ))}
             </div>
           </div>
+          
+          {/* Pagination dots - only visible on mobile */}
+          <div className="flex justify-center mt-4 space-x-2 md:hidden">
+            {testimonials.map((_, index) => (
+              <button
+                key={index}
+                className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+                  activeTestimonialIndex === index ? "bg-[var(--village-orange)] w-5" : "bg-gray-300"
+                }`}
+                onClick={() => scrollToTestimonial(index)}
+                aria-label={`View testimonial ${index + 1}`}
+              />
+            ))}
+          </div>
+          
           {/* Add this right after the testimonials mobile container */}
           <div className="flex justify-center mt-2 md:hidden">
             <p className="text-sm text-gray-500 italic">Swipe to explore</p>
@@ -673,26 +688,26 @@ export default function CommunityPage() {
 
         {/* Join the Community */}
         <motion.div
-          className="text-center bg-[#f0e9df] rounded-xl p-12"
+          className="text-center bg-[#f0e9df] rounded-xl p-6 md:p-12"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 1.1 }}
         >
-          <h2 className={`text-3xl font-bold mb-6 text-gray-800 ${inter.className}`}>Ready to Join Our Community?</h2>
-          <p className="text-xl text-gray-700 mb-8 max-w-2xl mx-auto">
+          <h2 className={`text-2xl md:text-3xl font-bold mb-4 md:mb-6 text-gray-800 ${inter.className}`}>Ready to Join Our Community?</h2>
+          <p className="text-base md:text-xl text-gray-700 mb-6 md:mb-8 max-w-2xl mx-auto">
             Experience the power of connection and collaboration. Book a tour today to see our spaces and learn more
             about becoming a member of The Village community.
           </p>
-          <div className="flex flex-wrap justify-center gap-4">
+          <div className="flex flex-wrap justify-center gap-3 md:gap-4">
             <Link
               href="/#booking-form"
-              className="px-8 py-4 bg-[var(--village-green)] text-white font-medium rounded-md hover:bg-[var(--village-green)]/90 transition-colors text-lg"
+              className="px-4 py-2 md:px-8 md:py-4 bg-[var(--village-green)] text-white font-medium rounded-md hover:bg-[var(--village-green)]/90 transition-colors text-sm md:text-lg"
             >
               Book a Tour
             </Link>
             <Link
               href="/coworking"
-              className="px-8 py-4 border border-[var(--village-green)] text-[var(--village-green)] font-medium rounded-md hover:bg-[var(--village-green)]/10 transition-colors text-lg"
+              className="px-4 py-2 md:px-8 md:py-4 border border-[var(--village-green)] text-[var(--village-green)] font-medium rounded-md hover:bg-[var(--village-green)]/10 transition-colors text-sm md:text-lg"
             >
               Ways to Join Us
             </Link>
